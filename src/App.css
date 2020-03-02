@@ -2,6 +2,18 @@
   text-align: center;
 }
 
+body{
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  top: 0;
+  left: 0;
+  min-width: 100%;
+  min-height: 100%;
+  background-image: url(./images/background.jpg);
+  background-attachment: fixed;
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
