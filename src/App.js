@@ -4,6 +4,7 @@ import Home from "./pages/Home";
 import InProgress from "./pages/InProgress";
 import NewTrip from "./pages/NewTrip";
 import Completed from "./pages/Completed";
+import Test from "./pages/Test";
 import { Route, Link, BrowserRouter as Router } from "react-router-dom";
 
 import { makeStyles } from "@material-ui/core/styles";
@@ -17,8 +18,11 @@ import DateRangeIcon from "@material-ui/icons/DateRange";
 import BeenHereIcon from "@material-ui/icons/Beenhere";
 import CommuteIcon from "@material-ui/icons/Commute";
 import HomeIcon from "@material-ui/icons/Home";
-import ExploreIcon from "@material-ui/icons/Explore";
+import MenuIcon from '@material-ui/icons/Menu';
+import IconButton from '@material-ui/core/IconButton';
 import AutoRenewIcon from "@material-ui/icons/Autorenew";
+import ExploreIcon from "@material-ui/icons/Explore";
+
 
 const useStyles = makeStyles({
   list: {
@@ -78,6 +82,12 @@ export default function App() {
           </ListItemIcon>
           <ListItemText primary="Completed trips" />
         </ListItem>
+        <ListItem button component={Link} to="/test">
+          <ListItemIcon>
+            <CommuteIcon></CommuteIcon>
+          </ListItemIcon>
+          <ListItemText primary="Test" />
+        </ListItem>
       </List>
     </div>
   );
@@ -85,7 +95,9 @@ export default function App() {
   return (
     <div className="App">
       <Router>
-        <Button onClick={toggleDrawer("left", true)}>Menus</Button>
+      <IconButton className="menuButton" onClick={toggleDrawer("left", true)} fontSize="large">
+        <MenuIcon />
+      </IconButton>
         <Drawer open={state.left} onClose={toggleDrawer("left", false)}>
           {sideList("left")}
         </Drawer>
@@ -93,6 +105,7 @@ export default function App() {
         <Route path="/new-trip" component={NewTrip}/>
         <Route path="/in-progress" component={InProgress}/>
         <Route path="/completed" component={Completed}/>
+        <Route path="/test" component={Test}/>
       </Router>
     </div>
   );
