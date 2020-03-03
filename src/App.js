@@ -23,6 +23,9 @@ import IconButton from '@material-ui/core/IconButton';
 import AutoRenewIcon from "@material-ui/icons/Autorenew";
 import ExploreIcon from "@material-ui/icons/Explore";
 
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
 
 const useStyles = makeStyles({
   list: {
@@ -30,6 +33,10 @@ const useStyles = makeStyles({
   },
   fullList: {
     width: "auto"
+  },
+  appbar: {
+    background: "transparent",
+    boxShadow: "none"
   }
 });
 
@@ -95,9 +102,13 @@ export default function App() {
   return (
     <div className="App">
       <Router>
-      <IconButton className="menuButton" onClick={toggleDrawer("left", true)} fontSize="large">
-        <MenuIcon />
-      </IconButton>
+      <AppBar position="static" className={classes.appbar}>
+        <Toolbar>
+          <IconButton edge="start" onClick={toggleDrawer("left", true)} color="inherit" aria-label="menu">
+            <MenuIcon />
+          </IconButton>
+        </Toolbar>
+      </AppBar>
         <Drawer open={state.left} onClose={toggleDrawer("left", false)}>
           {sideList("left")}
         </Drawer>
