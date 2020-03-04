@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
@@ -6,15 +6,16 @@ import CardContent from "@material-ui/core/CardContent";
 import CardHeader from "@material-ui/core/CardHeader";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
-import TextField from "@material-ui/core/TextField";
+import Input from "@material-ui/core/Input";
 import Divider from "@material-ui/core/Divider";
 import ActivitiesList from "./ActivitiesList";
 import Avatar from "@material-ui/core/Avatar";
 import DateRangeIcon from "@material-ui/icons/DateRange";
+import axios from "axios";
 
 const useStyles = makeStyles({
   root: {
-    minWidth: 190,
+    minWidth: 190
   },
   display: {},
   form: {},
@@ -26,6 +27,32 @@ const useStyles = makeStyles({
 
 export default function PlannedDay() {
   const classes = useStyles();
+  const [activityDescriptionInput, setActivityDescriptionInput] = useState();
+  const [priceInput, setPriceInput] = useState();
+
+  const addActivityDescription = e => {
+    setActivityDescriptionInput(e.target.value);
+  };
+
+  const addPrice = e => {
+    setPriceInput(e.target.value);
+  };
+
+  const handlePostRequest = e => {
+    e.preventDefault();
+
+    axios
+      .post("http://localhost:8080/trip/0/add-activity-to-day/0", {
+        description: activityDescriptionInput,
+        price: priceInput
+      })
+      .then(function(response) {
+        console.log(response);
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
+  };
 
   return (
     <Card className={classes.root}>
@@ -38,21 +65,33 @@ export default function PlannedDay() {
           </Avatar>
         }
       />
-      <Divider/>
+      <Divider />
       <CardContent className={classes.display}>
         <ActivitiesList />
         <Typography variant="h6">Total: 35.00 $</Typography>
       </CardContent>
       <Divider />
       <CardContent className={classes.form}>
-        <form autoComplete="off">
-          <TextField id="standard-basic" label="Activity" />
-          <TextField id="standard-basic" label="Price" />
+        <form noValidate autoComplete="off" onSubmit={handlePostRequest}>
+          <Input
+            id="standard-basic"
+            value={null}
+            placeholder="Activity"
+            onChange={addActivityDescription}
+          />
+          <Input
+            id="standard-basic"
+            value={null}
+            placeholder="Price"
+            onChange={addPrice}
+          />
+          <CardActions className={classes.action}>
+            <Button variant="outlined" size="small" type="submit">
+              Add activity
+            </Button>
+          </CardActions>
         </form>
       </CardContent>
-      <CardActions className={classes.action}>
-        <Button variant="outlined" size="small">Add activity</Button>
-      </CardActions>
     </Card>
   );
 }
