@@ -6,6 +6,7 @@ import NewTrip from "./pages/NewTrip";
 import Completed from "./pages/Completed";
 import Test from "./pages/Test";
 import { Route, Link, BrowserRouter as Router } from "react-router-dom";
+import { PlannedDaysProvider } from "./components/Context/PlannedDaysContext";
 
 import { makeStyles } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
@@ -22,7 +23,6 @@ import AutoRenewIcon from "@material-ui/icons/Autorenew";
 import ExploreIcon from "@material-ui/icons/Explore";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
-
 
 const useStyles = makeStyles({
   list: {
@@ -98,28 +98,30 @@ export default function App() {
 
   return (
     <div className="App">
-      <Router>
-        <AppBar position="static" className={classes.appbar}>
-          <Toolbar>
-            <IconButton
-              edge="start"
-              onClick={toggleDrawer("left", true)}
-              color="inherit"
-              aria-label="menu"
-            >
-              <MenuIcon />
-            </IconButton>
-          </Toolbar>
-        </AppBar>
-        <Drawer open={state.left} onClose={toggleDrawer("left", false)}>
-          {sideList("left")}
-        </Drawer>
-        <Route exact path="/" component={Home} />
-        <Route path="/new-trip" component={NewTrip} />
-        <Route path="/in-progress" component={InProgress} />
-        <Route path="/completed" component={Completed} />
-        <Route path="/test" component={Test} />
-      </Router>
+      <PlannedDaysProvider tripId={"0"}>
+        <Router>
+          <AppBar position="static" className={classes.appbar}>
+            <Toolbar>
+              <IconButton
+                edge="start"
+                onClick={toggleDrawer("left", true)}
+                color="inherit"
+                aria-label="menu"
+              >
+                <MenuIcon />
+              </IconButton>
+            </Toolbar>
+          </AppBar>
+          <Drawer open={state.left} onClose={toggleDrawer("left", false)}>
+            {sideList("left")}
+          </Drawer>
+          <Route exact path="/" component={Home} />
+          <Route path="/new-trip" component={NewTrip} />
+          <Route path="/in-progress" component={InProgress} />
+          <Route path="/completed" component={Completed} />
+          <Route path="/test" component={Test} />
+        </Router>
+      </PlannedDaysProvider>
     </div>
   );
 }

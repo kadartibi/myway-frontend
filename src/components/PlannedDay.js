@@ -25,7 +25,7 @@ const useStyles = makeStyles({
   }
 });
 
-export default function PlannedDay() {
+export default function PlannedDay(props) {
   const classes = useStyles();
   const [activityDescriptionInput, setActivityDescriptionInput] = useState();
   const [priceInput, setPriceInput] = useState();
@@ -58,7 +58,7 @@ export default function PlannedDay() {
     <Card className={classes.root}>
       <CardHeader
         titleTypographyProps={{ variant: "h5" }}
-        title="02-02-2020"
+        title={props.day.date}
         avatar={
           <Avatar>
             <DateRangeIcon />
@@ -67,8 +67,8 @@ export default function PlannedDay() {
       />
       <Divider />
       <CardContent className={classes.display}>
-        <ActivitiesList />
-        <Typography variant="h6">Total: 35.00 $</Typography>
+        <ActivitiesList activities={props.day.activities}/>
+        <Typography variant="h6">Total: {props.day.totalCost} $</Typography>
       </CardContent>
       <Divider />
       <CardContent className={classes.form}>
