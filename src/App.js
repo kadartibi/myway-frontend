@@ -18,14 +18,18 @@ import DateRangeIcon from "@material-ui/icons/DateRange";
 import BeenHereIcon from "@material-ui/icons/Beenhere";
 import CommuteIcon from "@material-ui/icons/Commute";
 import HomeIcon from "@material-ui/icons/Home";
-import MenuIcon from '@material-ui/icons/Menu';
-import IconButton from '@material-ui/core/IconButton';
+import MenuIcon from "@material-ui/icons/Menu";
+import IconButton from "@material-ui/core/IconButton";
 import AutoRenewIcon from "@material-ui/icons/Autorenew";
 import ExploreIcon from "@material-ui/icons/Explore";
 
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
+import AppBar from "@material-ui/core/AppBar";
+import Toolbar from "@material-ui/core/Toolbar";
+import Typography from "@material-ui/core/Typography";
+
+//datepicker
+import { MuiPickersUtilsProvider } from "@material-ui/pickers";
+import DateFnsUtils from "@date-io/date-fns";
 
 const useStyles = makeStyles({
   list: {
@@ -102,21 +106,28 @@ export default function App() {
   return (
     <div className="App">
       <Router>
-      <AppBar position="static" className={classes.appbar}>
-        <Toolbar>
-          <IconButton edge="start" onClick={toggleDrawer("left", true)} color="inherit" aria-label="menu">
-            <MenuIcon />
-          </IconButton>
-        </Toolbar>
-      </AppBar>
+        <AppBar position="static" className={classes.appbar}>
+          <Toolbar>
+            <IconButton
+              edge="start"
+              onClick={toggleDrawer("left", true)}
+              color="inherit"
+              aria-label="menu"
+            >
+              <MenuIcon />
+            </IconButton>
+          </Toolbar>
+        </AppBar>
         <Drawer open={state.left} onClose={toggleDrawer("left", false)}>
           {sideList("left")}
         </Drawer>
-        <Route exact path="/" component={Home}/>
-        <Route path="/new-trip" component={NewTrip}/>
-        <Route path="/in-progress" component={InProgress}/>
-        <Route path="/completed" component={Completed}/>
-        <Route path="/test" component={Test}/>
+        <Route exact path="/" component={Home} />
+        <MuiPickersUtilsProvider utils={DateFnsUtils}>
+          <Route path="/new-trip" component={NewTrip} />
+        </MuiPickersUtilsProvider>
+        <Route path="/in-progress" component={InProgress} />
+        <Route path="/completed" component={Completed} />
+        <Route path="/test" component={Test} />
       </Router>
     </div>
   );

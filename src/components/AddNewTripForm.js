@@ -6,6 +6,8 @@ import CardContent from "@material-ui/core/CardContent";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
+import KeyboardDatePickerTest from "./DatePicker";
+import CheckboxLabels from "./TravelTypeCheckbox";
 
 const useStyles = makeStyles({
   root: {
@@ -53,6 +55,9 @@ export const AddNewTripForm = () => {
                 label="Traveltype"
               />
               <br />
+              <KeyboardDatePickerTest />
+              <br />
+              <CheckboxLabels />
             </form>
           </CardContent>
           <CardActions className={classes.action}>
