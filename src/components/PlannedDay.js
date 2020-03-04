@@ -19,7 +19,7 @@ const useStyles = makeStyles({
   display: {},
   form: {},
   action: {
-    width: "110px",
+    width: "115px",
     margin: "auto"
   }
 });
@@ -51,7 +51,7 @@ export default function PlannedDay() {
         </form>
       </CardContent>
       <CardActions className={classes.action}>
-        <Button size="small">Add activity</Button>
+        <Button variant="outlined" size="small">Add activity</Button>
       </CardActions>
     </Card>
   );
