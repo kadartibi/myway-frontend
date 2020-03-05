@@ -14,7 +14,6 @@ export function PlannedDaysProvider(props) {
       .then(res => setPlannedDays(res.data));
   }, [tripId]);
 
-  console.log(plannedDays + "In context")
   return (
     <PlannedDaysContext.Provider value={[plannedDays]}>
       {props.children}
