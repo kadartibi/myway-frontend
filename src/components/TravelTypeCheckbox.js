@@ -1,9 +1,25 @@
-import React from "react";
+import React, { useContext } from "react";
 import FormGroup from "@material-ui/core/FormGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
+import { NewTripContext } from "../context/NewTripContext";
 
 export default function CheckboxLabels() {
+  const [
+    tripName,
+    setTripName,
+    country,
+    setCountry,
+    city,
+    setCity,
+    dateOfDeparture,
+    setDateOfDeparture,
+    dateOfReturn,
+    setDateOfReturn,
+    travelType,
+    setTravelType
+  ] = useContext(NewTripContext);
+
   const [state, setState] = React.useState({
     Plane: false,
     OwnMotorizedVehicle: false,
@@ -13,10 +29,24 @@ export default function CheckboxLabels() {
     PublicTransport: false,
     ByHorseOrCamel: false
   });
+  const handleListOfTravelTypes = type => {
+    if (travelType.includes(type)) {
+      let travelTypeArray = travelType;
+      const index = travelTypeArray.indexOf(type);
+      if (index > -1) {
+        travelTypeArray.splice(index, 1);
+      }
+      setTravelType(travelTypeArray);
+    } else {
+      setTravelType([...travelType, type]);
+    }
+  };
 
   const handleChange = name => event => {
     setState({ ...state, [name]: event.target.checked });
+    handleListOfTravelTypes(event.target.value);
   };
+  console.log(travelType);
 
   return (
     <FormGroup row>

@@ -30,6 +30,7 @@ import Typography from "@material-ui/core/Typography";
 //datepicker
 import { MuiPickersUtilsProvider } from "@material-ui/pickers";
 import DateFnsUtils from "@date-io/date-fns";
+import { NewTripProvider } from "./context/NewTripContext";
 
 const useStyles = makeStyles({
   list: {
@@ -106,28 +107,30 @@ export default function App() {
   return (
     <div className="App">
       <Router>
-        <AppBar position="static" className={classes.appbar}>
-          <Toolbar>
-            <IconButton
-              edge="start"
-              onClick={toggleDrawer("left", true)}
-              color="inherit"
-              aria-label="menu"
-            >
-              <MenuIcon />
-            </IconButton>
-          </Toolbar>
-        </AppBar>
-        <Drawer open={state.left} onClose={toggleDrawer("left", false)}>
-          {sideList("left")}
-        </Drawer>
-        <Route exact path="/" component={Home} />
-        <MuiPickersUtilsProvider utils={DateFnsUtils}>
-          <Route path="/new-trip" component={NewTrip} />
-        </MuiPickersUtilsProvider>
-        <Route path="/in-progress" component={InProgress} />
-        <Route path="/completed" component={Completed} />
-        <Route path="/test" component={Test} />
+        <NewTripProvider>
+          <AppBar position="static" className={classes.appbar}>
+            <Toolbar>
+              <IconButton
+                edge="start"
+                onClick={toggleDrawer("left", true)}
+                color="inherit"
+                aria-label="menu"
+              >
+                <MenuIcon />
+              </IconButton>
+            </Toolbar>
+          </AppBar>
+          <Drawer open={state.left} onClose={toggleDrawer("left", false)}>
+            {sideList("left")}
+          </Drawer>
+          <Route exact path="/" component={Home} />
+          <MuiPickersUtilsProvider utils={DateFnsUtils}>
+            <Route path="/new-trip" component={NewTrip} />
+          </MuiPickersUtilsProvider>
+          <Route path="/in-progress" component={InProgress} />
+          <Route path="/completed" component={Completed} />
+          <Route path="/test" component={Test} />
+        </NewTripProvider>
       </Router>
     </div>
   );
