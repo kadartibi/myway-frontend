@@ -3,6 +3,7 @@ import FormGroup from "@material-ui/core/FormGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
 import { NewTripContext } from "./Context/NewTripContext";
+import Grid from "@material-ui/core/Grid";
 
 export default function CheckboxLabels() {
   const [
@@ -46,87 +47,102 @@ export default function CheckboxLabels() {
     setState({ ...state, [name]: event.target.checked });
     handleListOfTravelTypes(event.target.value);
   };
-  console.log(travelType);
 
   return (
-    <FormGroup row>
-      <FormControlLabel
-        control={
-          <Checkbox
-            checked={state.Plane}
-            onChange={handleChange("Plane")}
-            value="Plane"
-            color="primary"
+    <FormGroup>
+      <Grid container spacing={3} alignItems="flex-start" justify="flex-start">
+        <Grid item xs={3}>
+          <FormControlLabel
+            control={
+              <Checkbox
+                checked={state.Plane}
+                onChange={handleChange("Plane")}
+                value="Plane"
+                color="primary"
+              />
+            }
+            label="Plane"
           />
-        }
-        label="Plane"
-      />
-      <FormControlLabel
-        control={
-          <Checkbox
-            checked={state.OwnMotorizedVehicle}
-            onChange={handleChange("OwnMotorizedVehicle")}
-            value="Own Motorized Vehicle"
-            color="primary"
+        </Grid>
+        <Grid item xs={3}>
+          <FormControlLabel
+            control={
+              <Checkbox
+                checked={state.OwnMotorizedVehicle}
+                onChange={handleChange("OwnMotorizedVehicle")}
+                value="Own Motorized Vehicle"
+                color="primary"
+              />
+            }
+            label="Own Motorized Vehicle"
           />
-        }
-        label="Own Motorized Vehicle"
-      />
-      <FormControlLabel
-        control={
-          <Checkbox
-            checked={state.RentalCar}
-            onChange={handleChange("RentalCar")}
-            value="Rental Car"
-            color="primary"
+        </Grid>
+        <Grid item xs={3}>
+          <FormControlLabel
+            control={
+              <Checkbox
+                checked={state.RentalCar}
+                onChange={handleChange("RentalCar")}
+                value="Rental Car"
+                color="primary"
+              />
+            }
+            label="Rental Car"
           />
-        }
-        label="Rental Car"
-      />
-      <FormControlLabel
-        control={
-          <Checkbox
-            checked={state.Bicycle}
-            onChange={handleChange("Bicycle")}
-            value="Bicycle"
-            color="primary"
+        </Grid>
+        <Grid item xs={3}>
+          <FormControlLabel
+            control={
+              <Checkbox
+                checked={state.Bicycle}
+                onChange={handleChange("Bicycle")}
+                value="Bicycle"
+                color="primary"
+              />
+            }
+            label="Bicycle"
           />
-        }
-        label="Bicycle"
-      />
-      <FormControlLabel
-        control={
-          <Checkbox
-            checked={state.Walk}
-            onChange={handleChange("Walk")}
-            value="Walk"
-            color="primary"
+        </Grid>
+        <Grid item xs={3}>
+          <FormControlLabel
+            control={
+              <Checkbox
+                checked={state.Walk}
+                onChange={handleChange("Walk")}
+                value="Walk"
+                color="primary"
+              />
+            }
+            label="Walk"
           />
-        }
-        label="Walk"
-      />
-      <FormControlLabel
-        control={
-          <Checkbox
-            checked={state.PublicTransport}
-            onChange={handleChange("PublicTransport")}
-            value="Public Transport"
-            color="primary"
+        </Grid>
+        <Grid item xs={3}>
+          <FormControlLabel
+            control={
+              <Checkbox
+                checked={state.PublicTransport}
+                onChange={handleChange("PublicTransport")}
+                value="Public Transport"
+                color="primary"
+              />
+            }
+            label="Public Transport"
           />
-        }
-        label="Public Transport"
-      />
-      <FormControlLabel
-        control={
-          <Checkbox
-            checked={state.ByHorseOrCamel}
-            onChange={handleChange("ByHorseOrCamel")}
-            value="By Horse Or Camel"
-            color="primary"
+        </Grid>
+        <Grid item xs={3}>
+          <FormControlLabel
+            control={
+              <Checkbox
+                checked={state.ByHorseOrCamel}
+                onChange={handleChange("ByHorseOrCamel")}
+                value="By Horse Or Camel"
+                color="primary"
+              />
+            }
+            label="By Horse Or Camel"
           />
-        }
-        label="By Horse Or Camel"
-      />
+        </Grid>
+      </Grid>
     </FormGroup>
   );
 }

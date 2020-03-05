@@ -8,6 +8,7 @@ import TextField from "@material-ui/core/TextField";
 import KeyboardDatePickerTest from "./DatePicker";
 import CheckboxLabels from "./TravelTypeCheckbox";
 import { NewTripContext } from "./Context/NewTripContext";
+import Grid from "@material-ui/core/Grid";
 
 const useStyles = makeStyles({
   root: {
@@ -49,48 +50,58 @@ export const AddNewTripForm = () => {
       <React.Fragment>
         <Card className={classes.root}>
           <CardContent className={classes.content}>
-            <form noValidate autoComplete="off">
-              <TextField
-                className="tripInput"
-                id="standard-basic"
-                label="Trip name"
-                value={null}
-                onChange={e => {
-                  setTripName(e.target.value);
-                }}
-              />
-              <br />
-              <TextField
-                className="tripInput"
-                id="standard-basic"
-                label="Country"
-                value={null}
-                onChange={e => {
-                  setCountry(e.target.value);
-                }}
-              />
-              <br />
-              <TextField
-                className="tripInput"
-                id="standard-basic"
-                label="City"
-                value={null}
-                onChange={e => {
-                  setCity(e.target.value);
-                }}
-              />
-              <br />
-              <KeyboardDatePickerTest />
-              <br />
-              <h3>Traveltype:</h3>
-              <CheckboxLabels />
-            </form>
-          </CardContent>
-          <CardActions className={classes.action}>
-            <Button size="small" onClick={sendToServer} to="/in-progress">
+            <Grid container spacing={3}>
+              <Grid item xs={6}>
+                <h3> Trip details:</h3>
+                <form noValidate autoComplete="off">
+                  <TextField
+                    className="tripInput"
+                    id="standard-basic"
+                    label="Trip name"
+                    value={null}
+                    onChange={e => {
+                      setTripName(e.target.value);
+                    }}
+                  />
+                  <br />
+                  <TextField
+                    className="tripInput"
+                    id="standard-basic"
+                    label="Country"
+                    value={null}
+                    onChange={e => {
+                      setCountry(e.target.value);
+                    }}
+                  />
+                  <br />
+                  <TextField
+                    className="tripInput"
+                    id="standard-basic"
+                    label="City"
+                    value={null}
+                    onChange={e => {
+                      setCity(e.target.value);
+                    }}
+                  />
+                </form>
+              </Grid>
+              <Grid item xs={6}>
+                <KeyboardDatePickerTest />
+              </Grid>
+              <Grid item xs={12}>
+                <h3>Traveltype:</h3>
+                <CheckboxLabels />
+              </Grid>
+            </Grid>
+            <Button
+              variant="outlined"
+              size="small"
+              onClick={sendToServer}
+              to="/in-progress"
+            >
               Submit trip
             </Button>
-          </CardActions>
+          </CardContent>
         </Card>
       </React.Fragment>
     </div>

@@ -21,7 +21,7 @@ export const NewTripProvider = props => {
         dateOfReturn: dateOfReturn,
         travelTypeList: travelType
       })
-      .then(/*(window.location.href = "/in-progress")*/);
+      .then((window.location.href = "/"));
   };
 
   return (
