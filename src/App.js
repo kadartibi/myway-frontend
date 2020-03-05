@@ -29,7 +29,7 @@ import Typography from "@material-ui/core/Typography";
 //datepicker
 import { MuiPickersUtilsProvider } from "@material-ui/pickers";
 import DateFnsUtils from "@date-io/date-fns";
-import { NewTripProvider } from "./context/NewTripContext";
+import { NewTripProvider } from "./components/Context/NewTripContext";
 
 const useStyles = makeStyles({
   list: {

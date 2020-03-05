@@ -7,7 +7,7 @@ import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import KeyboardDatePickerTest from "./DatePicker";
 import CheckboxLabels from "./TravelTypeCheckbox";
-import { NewTripContext } from "../context/NewTripContext";
+import { NewTripContext } from "./Context/NewTripContext";
 
 const useStyles = makeStyles({
   root: {

@@ -1,19 +1,19 @@
 import React, { createContext, useState } from "react";
 import axios from "axios";
-import { Redirect } from "react-router-dom";
+import { server } from "./ServerSelector";
 
 export const NewTripContext = createContext();
 
 export const NewTripProvider = props => {
-  const [tripName, setTripName] = useState("1");
-  const [country, setCountry] = useState("2");
-  const [city, setCity] = useState("kaki");
+  const [tripName, setTripName] = useState("");
+  const [country, setCountry] = useState("");
+  const [city, setCity] = useState("");
   const [dateOfDeparture, setDateOfDeparture] = useState("");
   const [dateOfReturn, setDateOfReturn] = useState("");
   const [travelType, setTravelType] = useState([]);
   const sendToServer = () => {
     axios
-      .post("http://localhost:8080/trip/add", {
+      .post(server + "/trip/add", {
         name: tripName,
         country: country,
         city: city,

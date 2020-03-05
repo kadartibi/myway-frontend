@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import FormGroup from "@material-ui/core/FormGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
-import { NewTripContext } from "../context/NewTripContext";
+import { NewTripContext } from "./Context/NewTripContext";
 
 export default function CheckboxLabels() {
   const [

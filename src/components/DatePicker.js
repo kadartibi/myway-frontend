@@ -1,6 +1,6 @@
 import React, { Fragment, useState, useContext } from "react";
 import { KeyboardDatePicker } from "@material-ui/pickers";
-import { NewTripContext } from "../context/NewTripContext";
+import { NewTripContext } from "./Context/NewTripContext";
 
 function KeyboardDatePickerTest(props) {
   const [selectedDepartureDate, handleDepartureDateChange] = useState(
