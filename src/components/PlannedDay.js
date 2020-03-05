@@ -18,7 +18,9 @@ const useStyles = makeStyles({
     minWidth: 190,
     maxWidth: 300,
     margin: "10px",
-    display: "inline-block"
+    height: "auto",
+    display: "inline-block",
+    verticalAlign: "top"
   },
   action: {
     width: "115px",
@@ -30,6 +32,7 @@ export default function PlannedDay(props) {
   const classes = useStyles();
   const [activityDescriptionInput, setActivityDescriptionInput] = useState();
   const [priceInput, setPriceInput] = useState();
+  const [day, setDay] = useState(props.day)
 
   const addActivityDescription = e => {
     setActivityDescriptionInput(e.target.value);
@@ -48,7 +51,7 @@ export default function PlannedDay(props) {
         price: priceInput
       })
       .then(function(response) {
-        console.log(response);
+        setDay(response.data);
       })
       .catch(function(error) {
         console.log(error);
@@ -59,7 +62,7 @@ export default function PlannedDay(props) {
     <Card className={classes.root}>
       <CardHeader
         titleTypographyProps={{ variant: "h5" }}
-        title={props.day.date}
+        title={day.date}
         avatar={
           <Avatar>
             <DateRangeIcon />
@@ -68,8 +71,8 @@ export default function PlannedDay(props) {
       />
       <Divider />
       <CardContent className={classes.display}>
-        <ActivitiesList activities={props.day.activities}/>
-        <Typography variant="h6">Total: {props.day.totalCost} $</Typography>
+        <ActivitiesList activities={day.activities}/>
+        <Typography variant="h6">Total: {day.totalCost} $</Typography>
       </CardContent>
       <Divider />
       <CardContent className={classes.form}>

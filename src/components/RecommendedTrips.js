@@ -9,6 +9,8 @@ import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import Backdrop from "@material-ui/core/Backdrop";
+import { makeStyles } from '@material-ui/core';
 
 const useStyles = makeStyles(theme => ({
     panel: {
@@ -18,14 +20,19 @@ const useStyles = makeStyles(theme => ({
       fontSize: theme.typography.pxToRem(15),
       fontWeight: theme.typography.fontWeightRegular,
     },
-  }));
+    backdrop: {
+        zIndex: theme.zIndex.drawer + 1,
+        color: '#fff',
+      }
+    }));
   
 
 function RecommendedTrips() {
   const [trips] = useContext(TripContext);
   const classes = useStyles();
 
-  return trips ? (
+
+  return trips.length !== 0 ? (
     <Grid container justify="center" spacing={0}>
       {trips.map(trip => (
         <ExpansionPanel className={classes.panel} key={trip.id} >
@@ -49,7 +56,9 @@ function RecommendedTrips() {
       ))}
     </Grid>
   ) : (
-    <CircularProgress />
+    <Backdrop className={classes.backdrop} open={true}>
+      <CircularProgress color="inherit" />
+    </Backdrop>
   );
 }
 
