@@ -1,9 +1,11 @@
-import React from 'react'
+import React from "react";
+import { AddNewTripForm } from "../components/AddNewTripForm";
 
-export default function NewTrip() {
-    return (
-        <div>
-            <h1>This is the new trip</h1>
-        </div>
-    )
-}
+export const NewTrip = () => {
+  return (
+    <div>
+      <AddNewTripForm />
+    </div>
+  );
+};
+export default NewTrip;
