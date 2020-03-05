@@ -1,5 +1,6 @@
 import React, { createContext, useState } from "react";
 import axios from "axios";
+import { Redirect } from "react-router-dom";
 
 export const NewTripContext = createContext();
 
@@ -20,7 +21,7 @@ export const NewTripProvider = props => {
         dateOfReturn: dateOfReturn,
         travelTypeList: travelType
       })
-      .then();
+      .then((window.location.href = "/in-progress"));
   };
 
   return (

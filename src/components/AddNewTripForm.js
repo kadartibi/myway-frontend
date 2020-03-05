@@ -40,6 +40,10 @@ export const AddNewTripForm = () => {
   ] = useContext(NewTripContext);
   const classes = useStyles();
 
+  const buttonOnclick = e => {
+    window.location.href = "/in-progress";
+  };
+
   return (
     <div>
       <React.Fragment>
@@ -83,7 +87,7 @@ export const AddNewTripForm = () => {
             </form>
           </CardContent>
           <CardActions className={classes.action}>
-            <Button size="small" onClick={sendToServer}>
+            <Button size="small" onClick={sendToServer} to="/in-progress">
               Submit trip
             </Button>
           </CardActions>
