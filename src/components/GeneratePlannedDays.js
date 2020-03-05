@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
-import PlannedDay from "../components/PlannedDay";
-import { PlannedDaysContext } from "../components/Context/PlannedDaysContext";
+import PlannedDay from "./PlannedDay";
+import { PlannedDaysContext } from "./Context/PlannedDaysContext";
 
 import { makeStyles } from "@material-ui/core";
 import CircularProgress from "@material-ui/core/CircularProgress";
@@ -17,7 +17,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function Test() {
+export default function GeneratePlannedDays() {
   const [plannedDays] = useContext(PlannedDaysContext);
   const classes = useStyles();
 

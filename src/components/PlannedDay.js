@@ -34,6 +34,7 @@ export default function PlannedDay(props) {
   const [priceInput, setPriceInput] = useState();
   const [day, setDay] = useState(props.day);
   const [activities, setActivities] = useState(props.day.activities);
+  const [totalCost, setTotalCost] = useState(props.day.totalCost);
 
   const addActivityDescription = e => {
     setActivityDescriptionInput(e.target.value);
@@ -47,13 +48,14 @@ export default function PlannedDay(props) {
     e.preventDefault();
 
     axios
-      .post("http://localhost:8080/trip/0/add-activity-to-day/0", {
+      .post("http://localhost:8080/trip/" + day.tripId + "/add-activity-to-day/" + day.id, {
         description: activityDescriptionInput,
         price: priceInput
       })
       .then(function(response) {
         setDay(response.data);
-        setActivities(response.data.activities);
+        setActivities(response.data.activities)
+        setTotalCost(response.data.totalCost);
       })
       .catch(function(error) {
         console.log(error);
@@ -78,8 +80,10 @@ export default function PlannedDay(props) {
           setActivities={setActivities}
           tripId={day.tripId}
           dayId={day.id}
+          totalCost={totalCost}
+          setTotalCost={setTotalCost}
         />
-        <Typography variant="h6">Total: {day.totalCost} $</Typography>
+        <Typography variant="h6">Total: {totalCost} $</Typography>
       </CardContent>
       <Divider />
       <CardContent className={classes.form}>

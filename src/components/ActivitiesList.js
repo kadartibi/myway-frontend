@@ -20,14 +20,16 @@ export default function Activities(props) {
   let setActivities = props.setActivities;
   let tripId = props.tripId;
   let dayId = props.dayId;
+  let totalCost = props.totalCost;
+  let setTotalCost = props.setTotalCost;
 
-  const handleActivitiesPost = (activity) => {
+  const handleActivitiesPost = activity => {
     axios
       .post(
         "http://localhost:8080/trip/" + tripId + "/update-activities/" + dayId,
         {
           description: activity.description,
-          price : activity.price
+          price: activity.price
         }
       )
       .then(function(response) {
@@ -38,7 +40,17 @@ export default function Activities(props) {
       });
   };
 
+  const updatedTotalCost = () => {
+    let sum = 0;
+    for (let activity of activities) {
+      sum += activity.price;
+    }
+    totalCost = sum;
+    return sum;
+  };
+
   const deleteActivity = activityToDelete => {
+    setTotalCost(totalCost - activityToDelete.price);
     setActivities(activities.filter(activity => activity !== activityToDelete));
     handleActivitiesPost(activityToDelete);
   };

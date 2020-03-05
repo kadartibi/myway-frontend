@@ -4,7 +4,6 @@ import Home from "./pages/Home";
 import InProgress from "./pages/InProgress";
 import NewTrip from "./pages/NewTrip";
 import Completed from "./pages/Completed";
-import Test from "./pages/Test";
 import { Route, Link, BrowserRouter as Router } from "react-router-dom";
 import { PlannedDaysProvider } from "./components/Context/PlannedDaysContext";
 
@@ -15,7 +14,6 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import BeenHereIcon from "@material-ui/icons/Beenhere";
-import CommuteIcon from "@material-ui/icons/Commute";
 import HomeIcon from "@material-ui/icons/Home";
 import MenuIcon from "@material-ui/icons/Menu";
 import IconButton from "@material-ui/core/IconButton";
@@ -24,7 +22,6 @@ import ExploreIcon from "@material-ui/icons/Explore";
 
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
-import Typography from "@material-ui/core/Typography";
 
 //datepicker
 import { MuiPickersUtilsProvider } from "@material-ui/pickers";
@@ -93,12 +90,6 @@ export default function App() {
           </ListItemIcon>
           <ListItemText primary="Completed trips" />
         </ListItem>
-        <ListItem button component={Link} to="/test">
-          <ListItemIcon>
-            <CommuteIcon />
-          </ListItemIcon>
-          <ListItemText primary="Test" />
-        </ListItem>
       </List>
     </div>
   );
@@ -129,7 +120,6 @@ export default function App() {
             </MuiPickersUtilsProvider>
             <Route path="/in-progress" component={InProgress} />
             <Route path="/completed" component={Completed} />
-            <Route path="/test" component={Test} />
           </Router>
         </PlannedDaysProvider>
       </NewTripProvider>
