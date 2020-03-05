@@ -12,6 +12,7 @@ export const TripProvider = props => {
         console.log(server)
         Axios.get(server + "/trip/list").then(res => {
             setTrips(res.data)
+            console.log(res.data)
         });
         }, [])
 

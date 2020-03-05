@@ -7,9 +7,10 @@ import { makeStyles } from '@material-ui/core';
 import ExpansionPanel from '@material-ui/core/ExpansionPanel';
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
-import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Backdrop from "@material-ui/core/Backdrop";
+import Test from "../pages/Test";
+import { PlannedDaysProvider } from "./Context/PlannedDaysContext";
 
 const useStyles = makeStyles(theme => ({
     panel: {
@@ -45,10 +46,10 @@ function RecommendedTrips() {
             </Grid>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
-          <Typography>
-              
+          <PlannedDaysProvider tripId={trip.id}>
+            <Test></Test>
+          </PlannedDaysProvider>
                 
-          </Typography>
         </ExpansionPanelDetails>
         </ExpansionPanel>
         
