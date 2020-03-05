@@ -23,12 +23,12 @@ export default function CheckboxLabels() {
 
   const [state, setState] = React.useState({
     Plane: false,
-    OwnMotorizedVehicle: false,
+    OwnCar: false,
     RentalCar: false,
     Bicycle: false,
     Walk: false,
     PublicTransport: false,
-    ByHorseOrCamel: false
+    HorseOrCamel: false
   });
   const handleListOfTravelTypes = type => {
     if (travelType.includes(type)) {
@@ -50,7 +50,7 @@ export default function CheckboxLabels() {
 
   return (
     <FormGroup>
-      <Grid container spacing={3} alignItems="flex-start" justify="flex-start">
+      <Grid container spacing={3}>
         <Grid item xs={3}>
           <FormControlLabel
             control={
@@ -68,13 +68,13 @@ export default function CheckboxLabels() {
           <FormControlLabel
             control={
               <Checkbox
-                checked={state.OwnMotorizedVehicle}
-                onChange={handleChange("OwnMotorizedVehicle")}
-                value="Own Motorized Vehicle"
+                checked={state.OwnCar}
+                onChange={handleChange("OwnCar")}
+                value="Own Car"
                 color="primary"
               />
             }
-            label="Own Motorized Vehicle"
+            label="Own Car"
           />
         </Grid>
         <Grid item xs={3}>
@@ -134,12 +134,12 @@ export default function CheckboxLabels() {
             control={
               <Checkbox
                 checked={state.ByHorseOrCamel}
-                onChange={handleChange("ByHorseOrCamel")}
-                value="By Horse Or Camel"
+                onChange={handleChange("HorseOrCamel")}
+                value="Horse Or Camel"
                 color="primary"
               />
             }
-            label="By Horse Or Camel"
+            label="Horse Or Camel"
           />
         </Grid>
       </Grid>
