@@ -10,7 +10,6 @@ import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Backdrop from "@material-ui/core/Backdrop";
-import { makeStyles } from '@material-ui/core';
 
 const useStyles = makeStyles(theme => ({
     panel: {
