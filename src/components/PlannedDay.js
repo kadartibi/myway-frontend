@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
@@ -15,10 +15,11 @@ import axios from "axios";
 
 const useStyles = makeStyles({
   root: {
-    minWidth: 190
+    minWidth: 190,
+    maxWidth: 300,
+    margin: "10px",
+    display: "inline-block"
   },
-  display: {},
-  form: {},
   action: {
     width: "115px",
     margin: "auto"
