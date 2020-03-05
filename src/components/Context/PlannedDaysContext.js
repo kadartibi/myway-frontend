@@ -1,5 +1,6 @@
 import React, { createContext, useState, useEffect } from "react";
 import axios from "axios";
+import { server } from "./ServerSelector";
 
 export const PlannedDaysContext = createContext();
 
@@ -9,7 +10,7 @@ export function PlannedDaysProvider(props) {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8080/trip/" + tripId + "/list-all-days")
+      .get(server + "/trip/" + tripId + "/list-all-days")
       .then(res => setPlannedDays(res.data));
   }, [tripId]);
 
