@@ -6,15 +6,14 @@ import NewTrip from "./pages/NewTrip";
 import Completed from "./pages/Completed";
 import Test from "./pages/Test";
 import { Route, Link, BrowserRouter as Router } from "react-router-dom";
+import { PlannedDaysProvider } from "./components/Context/PlannedDaysContext";
 
 import { makeStyles } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
-import Button from "@material-ui/core/Button";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
-import DateRangeIcon from "@material-ui/icons/DateRange";
 import BeenHereIcon from "@material-ui/icons/Beenhere";
 import CommuteIcon from "@material-ui/icons/Commute";
 import HomeIcon from "@material-ui/icons/Home";
@@ -72,31 +71,31 @@ export default function App() {
       <List>
         <ListItem button component={Link} to="/">
           <ListItemIcon>
-            <HomeIcon></HomeIcon>
+            <HomeIcon />
           </ListItemIcon>
           <ListItemText primary="Home" />
         </ListItem>
         <ListItem button component={Link} to="/new-trip">
           <ListItemIcon>
-            <DateRangeIcon></DateRangeIcon>
+            <ExploreIcon />
           </ListItemIcon>
           <ListItemText primary="New trip" />
         </ListItem>
         <ListItem button component={Link} to="/in-progress">
           <ListItemIcon>
-            <AutoRenewIcon></AutoRenewIcon>
+            <AutoRenewIcon />
           </ListItemIcon>
           <ListItemText primary="In progress" />
         </ListItem>
         <ListItem button component={Link} to="/completed">
           <ListItemIcon>
-            <BeenHereIcon></BeenHereIcon>
+            <BeenHereIcon />
           </ListItemIcon>
           <ListItemText primary="Completed trips" />
         </ListItem>
         <ListItem button component={Link} to="/test">
           <ListItemIcon>
-            <CommuteIcon></CommuteIcon>
+            <CommuteIcon />
           </ListItemIcon>
           <ListItemText primary="Test" />
         </ListItem>
@@ -106,32 +105,34 @@ export default function App() {
 
   return (
     <div className="App">
-      <Router>
-        <NewTripProvider>
-          <AppBar position="static" className={classes.appbar}>
-            <Toolbar>
-              <IconButton
-                edge="start"
-                onClick={toggleDrawer("left", true)}
-                color="inherit"
-                aria-label="menu"
-              >
-                <MenuIcon />
-              </IconButton>
-            </Toolbar>
-          </AppBar>
-          <Drawer open={state.left} onClose={toggleDrawer("left", false)}>
-            {sideList("left")}
-          </Drawer>
-          <Route exact path="/" component={Home} />
-          <MuiPickersUtilsProvider utils={DateFnsUtils}>
-            <Route path="/new-trip" component={NewTrip} />
-          </MuiPickersUtilsProvider>
-          <Route path="/in-progress" component={InProgress} />
-          <Route path="/completed" component={Completed} />
-          <Route path="/test" component={Test} />
-        </NewTripProvider>
-      </Router>
+      <NewTripProvider>
+        <PlannedDaysProvider tripId={"0"}>
+          <Router>
+            <AppBar position="static" className={classes.appbar}>
+              <Toolbar>
+                <IconButton
+                  edge="start"
+                  onClick={toggleDrawer("left", true)}
+                  color="inherit"
+                  aria-label="menu"
+                >
+                  <MenuIcon />
+                </IconButton>
+              </Toolbar>
+            </AppBar>
+            <Drawer open={state.left} onClose={toggleDrawer("left", false)}>
+              {sideList("left")}
+            </Drawer>
+            <Route exact path="/" component={Home} />
+            <MuiPickersUtilsProvider utils={DateFnsUtils}>
+              <Route path="/new-trip" component={NewTrip} />
+            </MuiPickersUtilsProvider>
+            <Route path="/in-progress" component={InProgress} />
+            <Route path="/completed" component={Completed} />
+            <Route path="/test" component={Test} />
+          </Router>
+        </PlannedDaysProvider>
+      </NewTripProvider>
     </div>
   );
 }
