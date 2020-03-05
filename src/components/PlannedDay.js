@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
@@ -32,7 +32,8 @@ export default function PlannedDay(props) {
   const classes = useStyles();
   const [activityDescriptionInput, setActivityDescriptionInput] = useState();
   const [priceInput, setPriceInput] = useState();
-  const [day, setDay] = useState(props.day)
+  const [day, setDay] = useState(props.day);
+  const [activities, setActivities] = useState(props.day.activities);
 
   const addActivityDescription = e => {
     setActivityDescriptionInput(e.target.value);
@@ -52,6 +53,7 @@ export default function PlannedDay(props) {
       })
       .then(function(response) {
         setDay(response.data);
+        setActivities(response.data.activities);
       })
       .catch(function(error) {
         console.log(error);
@@ -71,7 +73,12 @@ export default function PlannedDay(props) {
       />
       <Divider />
       <CardContent className={classes.display}>
-        <ActivitiesList activities={day.activities}/>
+        <ActivitiesList
+          activities={activities}
+          setActivities={setActivities}
+          tripId={day.tripId}
+          dayId={day.id}
+        />
         <Typography variant="h6">Total: {day.totalCost} $</Typography>
       </CardContent>
       <Divider />
