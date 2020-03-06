@@ -99,7 +99,7 @@ export default function App() {
       <NewTripProvider>
         <PlannedDaysProvider tripId={"0"}>
           <Router>
-            <AppBar position="static" className={classes.appbar}>
+            <AppBar position="fixed" className={classes.appbar}>
               <Toolbar>
                 <IconButton
                   edge="start"
