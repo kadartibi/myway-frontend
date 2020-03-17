@@ -21,7 +21,13 @@ export const NewTripProvider = props => {
         dateOfReturn: dateOfReturn,
         travelTypeList: travelType
       })
-      .then((window.location.href = "/"));
+      .then()
+      .catch(function(error) {
+        error.response.data.errors.forEach(element => {
+          console.log(element.field);
+          console.log(element.defaultMessage);
+        });
+      });
   };
 
   return (
