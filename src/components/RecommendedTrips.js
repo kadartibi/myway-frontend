@@ -45,7 +45,7 @@ function RecommendedTrips() {
           </ExpansionPanelSummary>
           <ExpansionPanelDetails>
             <PlannedDaysProvider tripId={trip.id}>
-              <GeneratePlannedDays/>
+              <GeneratePlannedDays />
             </PlannedDaysProvider>
           </ExpansionPanelDetails>
         </ExpansionPanel>

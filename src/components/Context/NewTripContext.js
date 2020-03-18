@@ -11,6 +11,7 @@ export const NewTripProvider = props => {
   const [dateOfDeparture, setDateOfDeparture] = useState("");
   const [dateOfReturn, setDateOfReturn] = useState("");
   const [travelType, setTravelType] = useState([]);
+  const [errorMessage, setErrorMessage] = useState();
   const sendToServer = () => {
     axios
       .post(server + "/trip/add", {
@@ -21,12 +22,13 @@ export const NewTripProvider = props => {
         dateOfReturn: dateOfReturn,
         travelTypeList: travelType
       })
-      .then()
+      .then(setErrorMessage(null))
       .catch(function(error) {
+        let errorList = [];
         error.response.data.errors.forEach(element => {
-          console.log(element.field);
-          console.log(element.defaultMessage);
+          errorList.push(" " + element.defaultMessage);
         });
+        setErrorMessage(errorList);
       });
   };
 
@@ -45,7 +47,9 @@ export const NewTripProvider = props => {
         setDateOfReturn,
         travelType,
         setTravelType,
-        sendToServer
+        sendToServer,
+        errorMessage,
+        setErrorMessage
       ]}
     >
       {props.children}
