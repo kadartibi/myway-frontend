@@ -26,27 +26,23 @@ export default function Activities(props) {
   const handleActivitiesPost = activity => {
     axios
       .post(
-        "http://localhost:8080/trip/" + tripId + "/update-activities/" + dayId,
+        "http://localhost:8080/trip/" +
+          tripId +
+          "/delete-from-activities/" +
+          dayId,
         {
-          description: activity.description,
-          price: activity.price
+          id : activity.id,
+          description : activity.description,
+          price : activity.price
         }
       )
       .then(function(response) {
-        console.log(response.data.activities);
+        console.log(response.data);
       })
       .catch(function(error) {
+        console.log(activity);
         console.log(error);
       });
-  };
-
-  const updatedTotalCost = () => {
-    let sum = 0;
-    for (let activity of activities) {
-      sum += activity.price;
-    }
-    totalCost = sum;
-    return sum;
   };
 
   const deleteActivity = activityToDelete => {

@@ -48,13 +48,19 @@ export default function PlannedDay(props) {
     e.preventDefault();
 
     axios
-      .post("http://localhost:8080/trip/" + day.tripId + "/add-activity-to-day/" + day.id, {
-        description: activityDescriptionInput,
-        price: priceInput
-      })
+      .post(
+        "http://localhost:8080/trip/" +
+          day.tripId +
+          "/add-activity-to-day/" +
+          day.id,
+        {
+          description: activityDescriptionInput,
+          price: priceInput
+        }
+      )
       .then(function(response) {
         setDay(response.data);
-        setActivities(response.data.activities)
+        setActivities(response.data.activities);
         setTotalCost(response.data.totalCost);
       })
       .catch(function(error) {
@@ -93,12 +99,14 @@ export default function PlannedDay(props) {
             value={null}
             placeholder="Activity"
             onChange={addActivityDescription}
+            required
           />
           <Input
             id="standard-basic"
             value={null}
             placeholder="Price"
             onChange={addPrice}
+            required
           />
           <CardActions className={classes.action}>
             <Button variant="outlined" size="small" type="submit">
