@@ -29,7 +29,7 @@ const useStyles = makeStyles(theme => ({
 function RecommendedTrips() {
   const [trips] = useContext(TripContext);
   const classes = useStyles();
-
+  
   return trips.length !== 0 ? (
     <Grid container justify="center" spacing={0}>
       {trips.map(trip => (
@@ -45,7 +45,7 @@ function RecommendedTrips() {
           </ExpansionPanelSummary>
           <ExpansionPanelDetails>
             <PlannedDaysProvider tripId={trip.id}>
-              <GeneratePlannedDays/>
+              <GeneratePlannedDays />
             </PlannedDaysProvider>
           </ExpansionPanelDetails>
         </ExpansionPanel>
