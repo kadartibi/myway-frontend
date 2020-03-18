@@ -34,8 +34,8 @@ export default function Trip(props) {
                 title={props.trip.name} />
             <Divider/>
             <CardContent className={classes.content}>
-                <Typography align='center' variant="h6">{props.trip.country}{bull}{props.trip.dateOfDeparture}
-                    {bull}{props.trip.dateOfReturn}{bull}{props.trip.totalCost}${bull}{props.trip.rating}</Typography>
+                <Typography align='center' variant="h6">{props.trip.country}{bull}From: {props.trip.dateOfDeparture}
+                    {bull}To: {props.trip.dateOfReturn}{bull}Total cost: {props.trip.totalCost}${bull}Rating: {props.trip.rating}</Typography>
                
             </CardContent>
         </Card>
