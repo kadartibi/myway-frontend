@@ -7,8 +7,6 @@ const useStyles = makeStyles({
   header: {
     color: "#fff",
     textShadow: "3px 3px #000"
-    // backgroundColor: "lightgrey",
-    // opacity: 0.7
   },
   root: {
     margin: "auto",
@@ -20,7 +18,6 @@ const useStyles = makeStyles({
     paddingTop: 200,
     color: "#fff",
     textShadow: "3px 3px #000"
-    // text-shadow: 2px 2px #FF0000;
   },
   recommended: {
     color: "#fff",

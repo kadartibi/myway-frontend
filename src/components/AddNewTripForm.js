@@ -9,10 +9,11 @@ import KeyboardDatePickerTest from "./DatePicker";
 import CheckboxLabels from "./TravelTypeCheckbox";
 import { NewTripContext } from "./Context/NewTripContext";
 import Grid from "@material-ui/core/Grid";
+import NewTripErrorHandler from "./NewTripErrorHandler";
 
 const useStyles = makeStyles({
   root: {
-    marginTop: "100px",
+    marginTop: "50px",
     margin: "auto",
     maxWidth: "50%",
     minWidth: "300",
@@ -37,7 +38,9 @@ export const AddNewTripForm = () => {
     setDateOfReturn,
     travelType,
     setTravelType,
-    sendToServer
+    sendToServer,
+    errorMessage,
+    setErrorMessage
   ] = useContext(NewTripContext);
   const classes = useStyles();
 
@@ -48,6 +51,7 @@ export const AddNewTripForm = () => {
   return (
     <div>
       <React.Fragment>
+        <NewTripErrorHandler />
         <Card className={classes.root}>
           <CardContent className={classes.content}>
             <Grid container spacing={3}>
@@ -55,6 +59,7 @@ export const AddNewTripForm = () => {
                 <h3> Trip details:</h3>
                 <form noValidate autoComplete="off">
                   <TextField
+                    required
                     className="tripInput"
                     id="standard-basic"
                     label="Trip name"
@@ -65,6 +70,7 @@ export const AddNewTripForm = () => {
                   />
                   <br />
                   <TextField
+                    required
                     className="tripInput"
                     id="standard-basic"
                     label="Country"
