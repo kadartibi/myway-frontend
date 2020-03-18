@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
+import Box from "@material-ui/core/Box";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import CardHeader from "@material-ui/core/CardHeader";
@@ -20,11 +21,14 @@ const useStyles = makeStyles({
     margin: "10px",
     height: "auto",
     display: "inline-block",
-    verticalAlign: "top"
+    verticalAlign: "top",
   },
   action: {
     width: "115px",
     margin: "auto"
+  },
+  inactivePointer: {
+    cursor: "default"
   }
 });
 
@@ -63,8 +67,8 @@ export default function PlannedDay(props) {
   };
 
   return (
-    <Card className={classes.root}>
-      <CardHeader
+    <Box boxShadow={5} className={classes.root}>
+      <CardHeader className={classes.inactivePointer}
         titleTypographyProps={{ variant: "h5" }}
         title={day.date}
         avatar={
@@ -83,7 +87,7 @@ export default function PlannedDay(props) {
           totalCost={totalCost}
           setTotalCost={setTotalCost}
         />
-        <Typography variant="h6">Total: {totalCost} $</Typography>
+        <Typography  className={classes.inactivePointer} variant="h6">Total: {totalCost} $</Typography>
       </CardContent>
       <Divider />
       <CardContent className={classes.form}>
@@ -107,6 +111,6 @@ export default function PlannedDay(props) {
           </CardActions>
         </form>
       </CardContent>
-    </Card>
+    </Box>
   );
 }
