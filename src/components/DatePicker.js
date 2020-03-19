@@ -33,7 +33,6 @@ function KeyboardDatePickerTest(props) {
           handleDepartureDateChange(date);
           setDateOfDeparture(date);
         }}
-        minDate={new Date()}
         format="dd/MM/yyyy"
       />
       <br />

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Box from "@material-ui/core/Box";
 import CardActions from "@material-ui/core/CardActions";
@@ -115,14 +115,12 @@ export default function PlannedDay(props) {
         <form noValidate autoComplete="off" onSubmit={handlePostRequest}>
           <Input
             id="standard-basic"
-            value={null}
             placeholder="Activity"
             onChange={addActivityDescription}
             required
           />
           <Input
             id="standard-basic"
-            value={null}
             placeholder="Price"
             onChange={addPrice}
             required

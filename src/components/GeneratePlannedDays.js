@@ -24,7 +24,7 @@ export default function GeneratePlannedDays() {
   return plannedDays ? (
     <div className={classes.root}>
       {plannedDays.map(day => (
-        <PlannedDay day={day} />
+        <PlannedDay key={day.id} day={day} />
       ))}
     </div>
   ) : (
