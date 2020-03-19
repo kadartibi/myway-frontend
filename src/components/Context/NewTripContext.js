@@ -20,7 +20,7 @@ export const NewTripProvider = props => {
         city: city,
         dateOfDeparture: dateOfDeparture,
         dateOfReturn: dateOfReturn,
-        travelTypeList: travelType
+        travelTypes: travelType
       })
       .then(setErrorMessage(null))
       .catch(function(error) {

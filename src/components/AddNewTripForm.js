@@ -45,7 +45,10 @@ export const AddNewTripForm = () => {
   const classes = useStyles();
 
   const buttonOnclick = e => {
-    window.location.href = "/in-progress";
+    sendToServer();
+    if (errorMessage === null) {
+      window.location.href = "/in-progress";
+    }
   };
 
   return (
@@ -102,7 +105,7 @@ export const AddNewTripForm = () => {
             <Button
               variant="outlined"
               size="small"
-              onClick={sendToServer}
+              onClick={buttonOnclick}
               to="/in-progress"
             >
               Submit trip
