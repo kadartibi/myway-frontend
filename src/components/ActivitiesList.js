@@ -31,16 +31,15 @@ export default function Activities(props) {
           "/delete-from-activities/" +
           dayId,
         {
-          id : activity.id,
-          description : activity.description,
-          price : activity.price
+          id: activity.id,
+          description: activity.description,
+          price: activity.price
         }
       )
       .then(function(response) {
         console.log(response.data);
       })
       .catch(function(error) {
-        console.log(activity);
         console.log(error);
       });
   };

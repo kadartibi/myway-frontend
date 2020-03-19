@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import Card from "@material-ui/core/Card";
 import Box from "@material-ui/core/Box";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
@@ -21,7 +20,7 @@ const useStyles = makeStyles({
     margin: "10px",
     height: "auto",
     display: "inline-block",
-    verticalAlign: "top",
+    verticalAlign: "top"
   },
   action: {
     width: "115px",
@@ -48,6 +47,15 @@ export default function PlannedDay(props) {
     setPriceInput(e.target.value);
   };
 
+  const updateTotalCost = () => {
+    let sumResult = 0;
+    for (let activity of activities) {
+      sumResult += activity.price;
+    }
+    setTotalCost(sumResult);
+    return sumResult;
+  };
+
   const handlePostRequest = e => {
     e.preventDefault();
 
@@ -63,18 +71,23 @@ export default function PlannedDay(props) {
         }
       )
       .then(function(response) {
+        setTotalCost(Number(totalCost) + Number(priceInput))
         setDay(response.data);
         setActivities(response.data.activities);
-        setTotalCost(response.data.totalCost);
       })
       .catch(function(error) {
         console.log(error);
       });
   };
 
+  useEffect(() => {
+    updateTotalCost();
+  }, []);
+
   return (
     <Box boxShadow={5} className={classes.root}>
-      <CardHeader className={classes.inactivePointer}
+      <CardHeader
+        className={classes.inactivePointer}
         titleTypographyProps={{ variant: "h5" }}
         title={day.date}
         avatar={
@@ -93,7 +106,9 @@ export default function PlannedDay(props) {
           totalCost={totalCost}
           setTotalCost={setTotalCost}
         />
-        <Typography  className={classes.inactivePointer} variant="h6">Total: {totalCost} $</Typography>
+        <Typography className={classes.inactivePointer} variant="h6">
+          Total: {totalCost} $
+        </Typography>
       </CardContent>
       <Divider />
       <CardContent className={classes.form}>
