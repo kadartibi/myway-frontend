@@ -26,7 +26,7 @@ export default function Trip(props) {
     
     const classes = useStyles();
     const bull = <span className={classes.bullet}>•</span>;
-    
+    const trip = props.trip;
     return (
         <Card className={classes.card}>
             <CardHeader
@@ -34,9 +34,9 @@ export default function Trip(props) {
                 title={props.trip.name} />
             <Divider/>
             <CardContent className={classes.content}>
-                <Typography align='center' variant="h6">{props.trip.country}{bull}From: {props.trip.dateOfDeparture}
-                    {bull}To: {props.trip.dateOfReturn}{bull}Total cost: {props.trip.totalCost}${bull}Rating: {props.trip.rating}</Typography>
-               
+                <Typography align='center' variant="h6">{trip.country}{bull}From: {trip.dateOfDeparture}{bull}To: {trip.dateOfReturn}
+                    {bull}Total cost: {trip.totalCost}${bull}Rating: {trip.rating}
+                    </Typography>
             </CardContent>
         </Card>
     )

@@ -1,8 +1,9 @@
 import React  from "react";
 import Trip from "../components/Trip";
 import Grid from "@material-ui/core/Grid";
+import Box from "@material-ui/core/Box";
 import CircularProgress from "@material-ui/core/CircularProgress";
-import { makeStyles } from "@material-ui/core";
+import { makeStyles, CardContent } from "@material-ui/core";
 import ExpansionPanel from "@material-ui/core/ExpansionPanel";
 import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
 import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
@@ -18,6 +19,11 @@ const useStyles = makeStyles(theme => ({
   heading: {
     fontSize: theme.typography.pxToRem(15),
     fontWeight: theme.typography.fontWeightRegular
+  },
+  travelTypes: {
+      cursor: "pointer",
+      minWidth: 1000,
+      maxWidth: 1000,
   },
   backdrop: {
     zIndex: theme.zIndex.drawer + 1,
