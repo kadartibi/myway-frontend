@@ -44,13 +44,6 @@ export const AddNewTripForm = () => {
   ] = useContext(NewTripContext);
   const classes = useStyles();
 
-  const buttonOnclick = e => {
-    sendToServer();
-    if (errorMessage === null) {
-      window.location.href = "/in-progress";
-    }
-  };
-
   return (
     <div>
       <React.Fragment>
@@ -105,7 +98,7 @@ export const AddNewTripForm = () => {
             <Button
               variant="outlined"
               size="small"
-              onClick={buttonOnclick}
+              onClick={sendToServer}
               to="/in-progress"
             >
               Submit trip

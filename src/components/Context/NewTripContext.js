@@ -22,7 +22,12 @@ export const NewTripProvider = props => {
         dateOfReturn: dateOfReturn,
         travelTypes: travelType
       })
-      .then(setErrorMessage(null))
+      .then(response => {
+        setErrorMessage(null);
+        if (response.status === 200) {
+          window.location.href = "/in-progress";
+        }
+      })
       .catch(function(error) {
         let errorList = [];
         error.response.data.errors.forEach(element => {
