@@ -99,14 +99,12 @@ export default function PlannedDay(props) {
         <form noValidate autoComplete="off" onSubmit={handlePostRequest}>
           <Input
             id="standard-basic"
-            value={""}
             placeholder="Activity"
             onChange={addActivityDescription}
             required
           />
           <Input
             id="standard-basic"
-            value={""}
             placeholder="Price"
             onChange={addPrice}
             required
