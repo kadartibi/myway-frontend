@@ -1,5 +1,4 @@
-import React, { useContext } from "react";
-import { TripContext } from "../components/Context/TripContext";
+import React  from "react";
 import Trip from "../components/Trip";
 import Grid from "@material-ui/core/Grid";
 import CircularProgress from "@material-ui/core/CircularProgress";
@@ -26,12 +25,12 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function RecommendedTrips() {
-  const [trips] = useContext(TripContext);
+function RecommendedTrips(props) {
+  const trips = props.trips;
   const classes = useStyles();
-  
+
   return trips.length !== 0 ? (
-    <Grid container justify="center" spacing={0}>
+    <Grid container justify="center">
       {trips.map(trip => (
         <ExpansionPanel className={classes.panel} key={trip.id}>
           <ExpansionPanelSummary
@@ -45,7 +44,7 @@ function RecommendedTrips() {
           </ExpansionPanelSummary>
           <ExpansionPanelDetails>
             <PlannedDaysProvider tripId={trip.id}>
-              <GeneratePlannedDays />
+              <GeneratePlannedDays/>
             </PlannedDaysProvider>
           </ExpansionPanelDetails>
         </ExpansionPanel>
