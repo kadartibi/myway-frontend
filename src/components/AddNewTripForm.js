@@ -44,10 +44,6 @@ export const AddNewTripForm = () => {
   ] = useContext(NewTripContext);
   const classes = useStyles();
 
-  const buttonOnclick = e => {
-    window.location.href = "/in-progress";
-  };
-
   return (
     <div>
       <React.Fragment>
