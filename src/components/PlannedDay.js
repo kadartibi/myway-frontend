@@ -21,7 +21,7 @@ const useStyles = makeStyles({
     margin: "10px",
     height: "auto",
     display: "inline-block",
-    verticalAlign: "top",
+    verticalAlign: "top"
   },
   action: {
     width: "115px",
@@ -74,7 +74,8 @@ export default function PlannedDay(props) {
 
   return (
     <Box boxShadow={5} className={classes.root}>
-      <CardHeader className={classes.inactivePointer}
+      <CardHeader
+        className={classes.inactivePointer}
         titleTypographyProps={{ variant: "h5" }}
         title={day.date}
         avatar={
@@ -93,21 +94,24 @@ export default function PlannedDay(props) {
           totalCost={totalCost}
           setTotalCost={setTotalCost}
         />
-        <Typography  className={classes.inactivePointer} variant="h6">Total: {totalCost} $</Typography>
+        <Typography className={classes.inactivePointer} variant="h6">
+          Total: {totalCost} $
+        </Typography>
       </CardContent>
       <Divider />
       <CardContent className={classes.form}>
         <form noValidate autoComplete="off" onSubmit={handlePostRequest}>
           <Input
             id="standard-basic"
-            value={null}
+            className="PlannedDayInputField"
             placeholder="Activity"
             onChange={addActivityDescription}
             required
           />
           <Input
+            type="number"
             id="standard-basic"
-            value={null}
+            className="PlannedDayInputField"
             placeholder="Price"
             onChange={addPrice}
             required
