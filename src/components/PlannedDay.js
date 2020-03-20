@@ -71,7 +71,7 @@ export default function PlannedDay(props) {
         }
       )
       .then(function(response) {
-        setTotalCost(Number(totalCost) + Number(priceInput))
+        setTotalCost(Number(totalCost) + Number(priceInput));
         setDay(response.data);
         setActivities(response.data.activities);
       })
@@ -115,12 +115,15 @@ export default function PlannedDay(props) {
         <form noValidate autoComplete="off" onSubmit={handlePostRequest}>
           <Input
             id="standard-basic"
+            className="PlannedDayInputField"
             placeholder="Activity"
             onChange={addActivityDescription}
             required
           />
           <Input
+            type="number"
             id="standard-basic"
+            className="PlannedDayInputField"
             placeholder="Price"
             onChange={addPrice}
             required

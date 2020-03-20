@@ -59,10 +59,10 @@ export const AddNewTripForm = () => {
                     className="tripInput"
                     id="standard-basic"
                     label="Trip name"
-                    value={null}
                     onChange={e => {
                       setTripName(e.target.value);
                     }}
+                    onSubmit={e => (e.target.value = null)}
                   />
                   <br />
                   <TextField
@@ -70,7 +70,6 @@ export const AddNewTripForm = () => {
                     className="tripInput"
                     id="standard-basic"
                     label="Country"
-                    value={null}
                     onChange={e => {
                       setCountry(e.target.value);
                     }}
