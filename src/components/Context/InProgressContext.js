@@ -2,20 +2,20 @@ import React, { useState, useEffect, createContext } from "react";
 import Axios from "axios";
 import { server } from "./ServerSelector";
 
-export const TripContext = createContext();
+export const InProgressContext = createContext();
 
-export const TripProvider = props => {
+export const InProgressProvider = props => {
   const [trips, setTrips] = useState([]);
 
   useEffect(() => {
-    Axios.get(server + "/trip/list").then(res => {
+    Axios.get(server + "/trip/in-progress").then(res => {
       setTrips(res.data);
     });
   }, []);
 
   return (
-    <TripContext.Provider value={[trips, setTrips]}>
+    <InProgressContext.Provider value={[trips, setTrips]}>
       {props.children}
-    </TripContext.Provider>
+    </InProgressContext.Provider>
   );
 };

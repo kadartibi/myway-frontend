@@ -6,6 +6,9 @@ import NewTrip from "./pages/NewTrip";
 import Completed from "./pages/Completed";
 import { Route, Link, BrowserRouter as Router } from "react-router-dom";
 import { PlannedDaysProvider } from "./components/Context/PlannedDaysContext";
+import { NewTripProvider } from "./components/Context/NewTripContext";
+import { InProgressProvider } from "./components/Context/InProgressContext";
+import { TripProvider } from "./components/Context/TripContext";
 
 import { makeStyles } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
@@ -26,7 +29,6 @@ import Toolbar from "@material-ui/core/Toolbar";
 //datepicker
 import { MuiPickersUtilsProvider } from "@material-ui/pickers";
 import DateFnsUtils from "@date-io/date-fns";
-import { NewTripProvider } from "./components/Context/NewTripContext";
 
 const useStyles = makeStyles({
   list: {
@@ -98,29 +100,33 @@ export default function App() {
     <div className="App">
       <NewTripProvider>
         <PlannedDaysProvider tripId={"0"}>
-          <Router>
-            <AppBar position="fixed" className={classes.appbar}>
-              <Toolbar>
-                <IconButton
-                  edge="start"
-                  onClick={toggleDrawer("left", true)}
-                  color="inherit"
-                  aria-label="menu"
-                >
-                  <MenuIcon />
-                </IconButton>
-              </Toolbar>
-            </AppBar>
-            <Drawer open={state.left} onClose={toggleDrawer("left", false)}>
-              {sideList("left")}
-            </Drawer>
-            <Route exact path="/" component={Home} />
-            <MuiPickersUtilsProvider utils={DateFnsUtils}>
-              <Route path="/new-trip" component={NewTrip} />
-            </MuiPickersUtilsProvider>
-            <Route path="/in-progress" component={InProgress} />
-            <Route path="/completed" component={Completed} />
-          </Router>
+          <InProgressProvider>
+            <TripProvider>
+              <Router>
+                <AppBar position="fixed" className={classes.appbar}>
+                  <Toolbar>
+                    <IconButton
+                      edge="start"
+                      onClick={toggleDrawer("left", true)}
+                      color="inherit"
+                      aria-label="menu"
+                    >
+                      <MenuIcon />
+                    </IconButton>
+                  </Toolbar>
+                </AppBar>
+                <Drawer open={state.left} onClose={toggleDrawer("left", false)}>
+                  {sideList("left")}
+                </Drawer>
+                <Route exact path="/" component={Home} />
+                <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                  <Route path="/new-trip" component={NewTrip} />
+                </MuiPickersUtilsProvider>
+                <Route path="/in-progress" component={InProgress} />
+                <Route path="/completed" component={Completed} />
+              </Router>
+            </TripProvider>
+          </InProgressProvider>
         </PlannedDaysProvider>
       </NewTripProvider>
     </div>

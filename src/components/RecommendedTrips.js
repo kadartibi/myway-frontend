@@ -1,9 +1,9 @@
-import React, { useContext } from "react";
-import { TripContext } from "../components/Context/TripContext";
+import React  from "react";
 import Trip from "../components/Trip";
 import Grid from "@material-ui/core/Grid";
+import Box from "@material-ui/core/Box";
 import CircularProgress from "@material-ui/core/CircularProgress";
-import { makeStyles } from "@material-ui/core";
+import { makeStyles, CardContent } from "@material-ui/core";
 import ExpansionPanel from "@material-ui/core/ExpansionPanel";
 import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
 import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
@@ -20,18 +20,23 @@ const useStyles = makeStyles(theme => ({
     fontSize: theme.typography.pxToRem(15),
     fontWeight: theme.typography.fontWeightRegular
   },
+  travelTypes: {
+      cursor: "pointer",
+      minWidth: 1000,
+      maxWidth: 1000,
+  },
   backdrop: {
     zIndex: theme.zIndex.drawer + 1,
     color: "#fff"
   }
 }));
 
-function RecommendedTrips() {
-  const [trips] = useContext(TripContext);
+function RecommendedTrips(props) {
+  const trips = props.trips;
   const classes = useStyles();
-  
+
   return trips.length !== 0 ? (
-    <Grid container justify="center" spacing={0}>
+    <Grid container justify="center">
       {trips.map(trip => (
         <ExpansionPanel className={classes.panel} key={trip.id}>
           <ExpansionPanelSummary
@@ -45,7 +50,7 @@ function RecommendedTrips() {
           </ExpansionPanelSummary>
           <ExpansionPanelDetails>
             <PlannedDaysProvider tripId={trip.id}>
-              <GeneratePlannedDays />
+              <GeneratePlannedDays/>
             </PlannedDaysProvider>
           </ExpansionPanelDetails>
         </ExpansionPanel>

@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useContext } from "react";
 import { makeStyles, Typography } from "@material-ui/core";
-import { TripProvider } from "../components/Context/TripContext";
+import { TripContext } from "../components/Context/TripContext";
 import RecommendedTrips from "../components/RecommendedTrips";
 
 const useStyles = makeStyles({
@@ -29,9 +29,10 @@ const useStyles = makeStyles({
 
 export default function Home() {
   const classes = useStyles();
+  const [trips] = useContext(TripContext);
+
 
   return (
-    <TripProvider>
       <div className={classes.root}>
         <div className={classes.header}>
           <Typography variant="h1">Welcome Travellers!</Typography>
@@ -44,8 +45,7 @@ export default function Home() {
             Here are the best ones so far!
           </Typography>
         </div>
-        <RecommendedTrips class={classes.root} />
+        <RecommendedTrips trips={trips} class={classes.root} />
       </div>
-    </TripProvider>
   );
 }
