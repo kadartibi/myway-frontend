@@ -7,20 +7,7 @@ function KeyboardDatePickerTest(props) {
     new Date()
   );
   const [selectedReturnDate, handleReturnDateChange] = useState(new Date());
-  const [
-    tripName,
-    setTripName,
-    country,
-    setCountry,
-    city,
-    setCity,
-    dateOfDeparture,
-    setDateOfDeparture,
-    dateOfReturn,
-    setDateOfReturn,
-    travelType,
-    setTravelType
-  ] = useContext(NewTripContext);
+  const {setDateOfDeparture,setDateOfReturn} = useContext(NewTripContext);
 
   return (
     <Fragment>

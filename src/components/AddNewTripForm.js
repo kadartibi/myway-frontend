@@ -1,7 +1,6 @@
 import React, { useContext } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
-import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
@@ -25,23 +24,7 @@ const useStyles = makeStyles({
 });
 
 export const AddNewTripForm = () => {
-  const [
-    tripName,
-    setTripName,
-    country,
-    setCountry,
-    city,
-    setCity,
-    dateOfDeparture,
-    setDateOfDeparture,
-    dateOfReturn,
-    setDateOfReturn,
-    travelType,
-    setTravelType,
-    sendToServer,
-    errorMessage,
-    setErrorMessage
-  ] = useContext(NewTripContext);
+  const { setTripName, setCountry, setCity, sendToServer } = useContext(NewTripContext);
   const classes = useStyles();
 
   return (
