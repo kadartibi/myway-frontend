@@ -82,7 +82,7 @@ export default function PlannedDay(props) {
 
   useEffect(() => {
     updateTotalCost();
-  }, []);
+  });
 
   return (
     <Box boxShadow={5} className={classes.root}>
