@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { makeStyles, Typography } from "@material-ui/core";
-import RecommendedTrips from "../components/RecommendedTrips";
+import DisplayTrips from "../components/DisplayTrips";
 import { InProgressContext } from "../components/Context/InProgressContext";
 
 const useStyles = makeStyles({
@@ -31,7 +31,7 @@ export default function InProgress() {
       <div className={classes.header}>
         <Typography variant="h2">Trips in progress</Typography>
       </div>
-      <RecommendedTrips trips={trips} class={classes.root} />
+      <DisplayTrips trips={trips} class={classes.root} />
     </div>
   );
 }

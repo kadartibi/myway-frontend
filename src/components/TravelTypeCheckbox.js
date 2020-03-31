@@ -6,20 +6,7 @@ import { NewTripContext } from "./Context/NewTripContext";
 import Grid from "@material-ui/core/Grid";
 
 export default function CheckboxLabels() {
-  const [
-    tripName,
-    setTripName,
-    country,
-    setCountry,
-    city,
-    setCity,
-    dateOfDeparture,
-    setDateOfDeparture,
-    dateOfReturn,
-    setDateOfReturn,
-    travelType,
-    setTravelType
-  ] = useContext(NewTripContext);
+  const {travelType,setTravelType } = useContext(NewTripContext);
 
   const [state, setState] = React.useState({
     Plane: false,

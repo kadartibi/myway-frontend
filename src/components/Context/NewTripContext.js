@@ -39,7 +39,7 @@ export const NewTripProvider = props => {
 
   return (
     <NewTripContext.Provider
-      value={[
+      value={{
         tripName,
         setTripName,
         country,
@@ -55,7 +55,7 @@ export const NewTripProvider = props => {
         sendToServer,
         errorMessage,
         setErrorMessage
-      ]}
+      }}
     >
       {props.children}
     </NewTripContext.Provider>

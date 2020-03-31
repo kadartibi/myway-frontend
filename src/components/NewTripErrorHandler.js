@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { NewTripContext } from "./Context/NewTripContext";
-import Button from "@material-ui/core/Button";
-import Snackbar from "@material-ui/core/Snackbar";
+// import Button from "@material-ui/core/Button";
+// import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -21,34 +21,18 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export const NewTripErrorHandler = () => {
-  const [
-    tripName,
-    setTripName,
-    country,
-    setCountry,
-    city,
-    setCity,
-    dateOfDeparture,
-    setDateOfDeparture,
-    dateOfReturn,
-    setDateOfReturn,
-    travelType,
-    setTravelType,
-    sendToServer,
-    errorMessage,
-    setErrorMessage
-  ] = useContext(NewTripContext);
+  const {errorMessage} = useContext(NewTripContext);
 
   const classes = useStyles();
-  const [open, setOpen] = React.useState(false);
+  // const [open, setOpen] = React.useState(false);
 
-  const handleClose = (event, reason) => {
-    if (reason === "clickaway") {
-      return;
-    }
+  // const handleClose = (event, reason) => {
+  //   if (reason === "clickaway") {
+  //     return;
+  //   }
 
-    setOpen(false);
-  };
+  //   setOpen(false);
+  // };
 
   return errorMessage != null ? (
     <div className={classes.root}>

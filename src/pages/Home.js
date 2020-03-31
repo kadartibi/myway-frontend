@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { makeStyles, Typography } from "@material-ui/core";
 import { RecommendedTripContext } from "../components/Context/RecommendedTripContext";
-import RecommendedTrips from "../components/RecommendedTrips";
+import DisplayTrips from "../components/DisplayTrips";
 
 const useStyles = makeStyles({
   header: {
@@ -44,7 +44,7 @@ export default function Home() {
           Here are the best ones so far!
         </Typography>
       </div>
-      <RecommendedTrips trips={trips} class={classes.root} />
+      <DisplayTrips trips={trips} class={classes.root} />
     </div>
   );
 }
