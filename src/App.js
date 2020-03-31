@@ -5,6 +5,7 @@ import InProgress from "./pages/InProgress";
 import NewTrip from "./pages/NewTrip";
 import Completed from "./pages/Completed";
 import SignUp from "./pages/SignUp";
+import SignIn from "./pages/SignIn";
 import { Route, Link, BrowserRouter as Router } from "react-router-dom";
 import { PlannedDaysProvider } from "./components/Context/PlannedDaysContext";
 import { NewTripProvider } from "./components/Context/NewTripContext";
@@ -130,6 +131,7 @@ export default function App() {
                   <Route path="/new-trip" component={NewTrip} />
                 </MuiPickersUtilsProvider>
                 <Route path="/sign-up" component={SignUp} />
+                <Route path="/sign-in" component={SignIn} />
                 <Route path="/in-progress" component={InProgress} />
                 <Route path="/completed" component={Completed} />
               </Router>
