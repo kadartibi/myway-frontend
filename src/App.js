@@ -4,6 +4,7 @@ import Home from "./pages/Home";
 import InProgress from "./pages/InProgress";
 import NewTrip from "./pages/NewTrip";
 import Completed from "./pages/Completed";
+import SignUp from "./pages/SignUp";
 import { Route, Link, BrowserRouter as Router } from "react-router-dom";
 import { PlannedDaysProvider } from "./components/Context/PlannedDaysContext";
 import { NewTripProvider } from "./components/Context/NewTripContext";
@@ -80,6 +81,12 @@ export default function App() {
           </ListItemIcon>
           <ListItemText primary="New trip" />
         </ListItem>
+        <ListItem button component={Link} to="/sign-up">
+          <ListItemIcon>
+            <ExploreIcon />
+          </ListItemIcon>
+          <ListItemText primary="Sign up" />
+        </ListItem>
         <ListItem button component={Link} to="/in-progress">
           <ListItemIcon>
             <AutoRenewIcon />
@@ -122,6 +129,7 @@ export default function App() {
                 <MuiPickersUtilsProvider utils={DateFnsUtils}>
                   <Route path="/new-trip" component={NewTrip} />
                 </MuiPickersUtilsProvider>
+                <Route path="/sign-up" component={SignUp} />
                 <Route path="/in-progress" component={InProgress} />
                 <Route path="/completed" component={Completed} />
               </Router>
