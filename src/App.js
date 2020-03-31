@@ -8,7 +8,7 @@ import { Route, Link, BrowserRouter as Router } from "react-router-dom";
 import { PlannedDaysProvider } from "./components/Context/PlannedDaysContext";
 import { NewTripProvider } from "./components/Context/NewTripContext";
 import { InProgressProvider } from "./components/Context/InProgressContext";
-import { TripProvider } from "./components/Context/TripContext";
+import { RecommendedTripProvider } from "./components/Context/RecommendedTripContext";
 
 import { makeStyles } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
@@ -101,7 +101,7 @@ export default function App() {
       <NewTripProvider>
         <PlannedDaysProvider tripId={"0"}>
           <InProgressProvider>
-            <TripProvider>
+            <RecommendedTripProvider>
               <Router>
                 <AppBar position="fixed" className={classes.appbar}>
                   <Toolbar>
@@ -125,7 +125,7 @@ export default function App() {
                 <Route path="/in-progress" component={InProgress} />
                 <Route path="/completed" component={Completed} />
               </Router>
-            </TripProvider>
+            </RecommendedTripProvider>
           </InProgressProvider>
         </PlannedDaysProvider>
       </NewTripProvider>

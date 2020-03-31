@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { makeStyles, Typography } from "@material-ui/core";
-import { TripContext } from "../components/Context/TripContext";
+import { RecommendedTripContext } from "../components/Context/RecommendedTripContext";
 import RecommendedTrips from "../components/RecommendedTrips";
 
 const useStyles = makeStyles({
@@ -29,23 +29,22 @@ const useStyles = makeStyles({
 
 export default function Home() {
   const classes = useStyles();
-  const [trips] = useContext(TripContext);
-
+  const [trips] = useContext(RecommendedTripContext);
 
   return (
-      <div className={classes.root}>
-        <div className={classes.header}>
-          <Typography variant="h1">Welcome Travellers!</Typography>
-          <Typography className={classes.intro} variant="h3">
-            You can find here the best trips from around the world! Browse them,
-            rate if you like, amend them for yourself, to fit your needs or plan
-            your dream trip from scratch!
-          </Typography>
-          <Typography className={classes.recommended} variant="h3">
-            Here are the best ones so far!
-          </Typography>
-        </div>
-        <RecommendedTrips trips={trips} class={classes.root} />
+    <div className={classes.root}>
+      <div className={classes.header}>
+        <Typography variant="h1">Welcome Travellers!</Typography>
+        <Typography className={classes.intro} variant="h3">
+          You can find here the best trips from around the world! Browse them,
+          rate if you like, amend them for yourself, to fit your needs or plan
+          your dream trip from scratch!
+        </Typography>
+        <Typography className={classes.recommended} variant="h3">
+          Here are the best ones so far!
+        </Typography>
       </div>
+      <RecommendedTrips trips={trips} class={classes.root} />
+    </div>
   );
 }
