@@ -12,7 +12,8 @@ import Container from "@material-ui/core/Container";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import { Link as routerLink } from "react-router-dom";
-
+import { useState } from "react";
+import Axios from "axios";
 
 const useStyles = makeStyles(theme => ({
   paper: {
@@ -47,6 +48,41 @@ const useStyles = makeStyles(theme => ({
 export default function SignIn() {
   const classes = useStyles();
 
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [message, setMessage] = useState("No message");
+
+  const login = () => {
+    console.log("fuck you")
+    Axios.post(
+      "http://localhost:8080/auth/login",
+      {
+        username: username,
+        password: password
+      },
+      {
+        withCredentials: true
+      }
+    )
+      .then(() => {
+        Axios.get("http://localhost:3000/recommended", {
+          withCredentials: true
+        })
+          .then(res => {
+            setMessage(res.data);
+            console.log(message);
+          })
+          .catch(() => {
+            setMessage("Sorry bro, not authorized");
+            console.log(message);
+          });
+      })
+      .catch(() => {
+        setMessage("Something went wrong");
+        console.log("something wrong");
+      });
+  };
+
   return (
     <Card className={classes.root}>
       <CardContent className={classes.content}>
@@ -65,11 +101,13 @@ export default function SignIn() {
                 margin="normal"
                 required
                 fullWidth
-                id="email"
-                label="Email Address"
-                name="email"
-                autoComplete="email"
+                id="username"
+                label="Username"
+                name="username"
+                autoComplete="username"
                 autoFocus
+                value={username}
+                onChange={e => setUsername(e.target.value)}
               />
               <TextField
                 variant="outlined"
@@ -81,6 +119,8 @@ export default function SignIn() {
                 type="password"
                 id="password"
                 autoComplete="current-password"
+                value={password}
+                onChange={e => setPassword(e.target.value)}
               />
               <Button
                 type="submit"
@@ -88,6 +128,7 @@ export default function SignIn() {
                 variant="contained"
                 color="primary"
                 className={classes.submit}
+                onClick={login}
               >
                 Sign In
               </Button>
@@ -98,7 +139,12 @@ export default function SignIn() {
                   </Link>
                 </Grid>
                 <Grid item>
-                  <Link button component={routerLink} to="/sign-up" variant="body2">
+                  <Link
+                    button
+                    component={routerLink}
+                    to="/sign-up"
+                    variant="body2"
+                  >
                     {"Don't have an account? Sign Up"}
                   </Link>
                 </Grid>
