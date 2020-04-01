@@ -50,19 +50,19 @@ export default function SignIn() {
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [message, setMessage] = useState("No message");
 
   const login = () => {
-    axios.post(
-      "http://localhost:8080/auth/login",
-      {
-        username: username,
-        password: password
-      },
-      {
-        withCredentials: true
-      }
-    )
+    axios
+      .post(
+        "http://localhost:8080/auth/login",
+        {
+          username,
+          password
+        },
+        {
+          withCredentials: true
+        }
+      )
       .then(res => {
         console.log(res.data);
         if (res.status === 200) {
@@ -70,7 +70,6 @@ export default function SignIn() {
         }
       })
       .catch(() => {
-        setMessage("Something went wrong");
         console.log("something wrong");
       });
   };
