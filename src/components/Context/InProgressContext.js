@@ -8,7 +8,9 @@ export const InProgressProvider = props => {
   const [trips, setTrips] = useState([]);
 
   useEffect(() => {
-    Axios.get(server + "/trip/in-progress").then(res => {
+    Axios.get(server + "/trip/in-progress", {
+      withCredentials: true
+    }).then(res => {
       setTrips(res.data);
     });
   }, []);
