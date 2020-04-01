@@ -64,7 +64,12 @@ export default function SignIn() {
         withCredentials: true
       }
     )
-      .then(res => {console.log(res.data)}
+      .then(res => {
+        console.log(res.data);
+        if (res.status === 200) {
+          window.location.href = "/";
+        }
+      })
       .catch(() => {
         setMessage("Something went wrong");
         console.log("something wrong");
