@@ -8,13 +8,17 @@ export const RecommendedTripProvider = props => {
   const [recommendedTrips, setRecommendedTrips] = useState([]);
 
   useEffect(() => {
-    Axios.get(server + "/trip/recommended").then(res => {
+    Axios.get(server + "/trip/recommended", {
+      withCredentials: true
+    }).then(res => {
       setRecommendedTrips(res.data);
     });
   }, []);
 
   return (
-    <RecommendedTripContext.Provider value={[recommendedTrips, setRecommendedTrips]}>
+    <RecommendedTripContext.Provider
+      value={[recommendedTrips, setRecommendedTrips]}
+    >
       {props.children}
     </RecommendedTripContext.Provider>
   );
