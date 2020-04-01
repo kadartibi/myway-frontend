@@ -53,8 +53,6 @@ export default function SignIn() {
   const [message, setMessage] = useState("No message");
 
   const login = () => {
-    console.log(username)
-    console.log(password)
     axios.post(
       "http://localhost:8080/auth/login",
       {
