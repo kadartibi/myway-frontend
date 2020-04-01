@@ -14,14 +14,20 @@ export const NewTripProvider = props => {
   const [errorMessage, setErrorMessage] = useState();
   const sendToServer = () => {
     axios
-      .post(server + "/trip/add", {
-        name: tripName,
-        country: country,
-        city: city,
-        dateOfDeparture: dateOfDeparture,
-        dateOfReturn: dateOfReturn,
-        travelTypes: travelType
-      })
+      .post(
+        server + "/trip/add",
+        {
+          name: tripName,
+          country: country,
+          city: city,
+          dateOfDeparture: dateOfDeparture,
+          dateOfReturn: dateOfReturn,
+          travelTypes: travelType
+        },
+        {
+          withCredentials: true
+        }
+      )
       .then(response => {
         setErrorMessage(null);
         if (response.status === 200) {

@@ -31,6 +31,7 @@ import Toolbar from "@material-ui/core/Toolbar";
 //datepicker
 import { MuiPickersUtilsProvider } from "@material-ui/pickers";
 import DateFnsUtils from "@date-io/date-fns";
+import { CompletedTripProvider } from "./components/Context/CompletedTripContext";
 
 const useStyles = makeStyles({
   list: {
@@ -110,7 +111,8 @@ export default function App() {
         <PlannedDaysProvider tripId={"0"}>
           <InProgressProvider>
             <RecommendedTripProvider>
-              <Router>
+              <CompletedTripProvider>
+                <Router>
                 <AppBar position="fixed" className={classes.appbar}>
                   <Toolbar>
                     <IconButton
@@ -135,6 +137,7 @@ export default function App() {
                 <Route path="/in-progress" component={InProgress} />
                 <Route path="/completed" component={Completed} />
               </Router>
+              </CompletedTripProvider>
             </RecommendedTripProvider>
           </InProgressProvider>
         </PlannedDaysProvider>

@@ -53,7 +53,7 @@ export default function SignIn() {
   const [message, setMessage] = useState("No message");
 
   const login = () => {
-    console.log("fuck you")
+    console.log("fuck you");
     Axios.post(
       "http://localhost:8080/auth/login",
       {
@@ -64,7 +64,10 @@ export default function SignIn() {
         withCredentials: true
       }
     )
-      .then
+      .then(res => {console.log(res.data)
+        if (res.status === 200) {
+          window.location.href = "/";
+        }})
       .catch(() => {
         setMessage("Something went wrong");
         console.log("something wrong");
@@ -111,7 +114,6 @@ export default function SignIn() {
                 onChange={e => setPassword(e.target.value)}
               />
               <Button
-                // type="submit"
                 fullWidth
                 variant="contained"
                 color="primary"
