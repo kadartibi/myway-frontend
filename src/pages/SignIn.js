@@ -64,19 +64,7 @@ export default function SignIn() {
         withCredentials: true
       }
     )
-      .then(() => {
-        Axios.get("http://localhost:3000/recommended", {
-          withCredentials: true
-        })
-          .then(res => {
-            setMessage(res.data);
-            console.log(message);
-          })
-          .catch(() => {
-            setMessage("Sorry bro, not authorized");
-            console.log(message);
-          });
-      })
+      .then
       .catch(() => {
         setMessage("Something went wrong");
         console.log("something wrong");
@@ -123,7 +111,7 @@ export default function SignIn() {
                 onChange={e => setPassword(e.target.value)}
               />
               <Button
-                type="submit"
+                // type="submit"
                 fullWidth
                 variant="contained"
                 color="primary"
