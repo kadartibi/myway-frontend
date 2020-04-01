@@ -50,34 +50,32 @@ export default function SignUp() {
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [message, setMessage] = useState("No message");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
 
   const register = () => {
     Axios.post(
       "http://localhost:8080/auth/signup",
       {
         username,
-        password
+        password,
+        firstName,
+        lastName,
+        email
       },
       {
         withCredentials: true
       }
     )
-      .then(() => {
-        Axios.get("http://localhost:3000", {
-          withCredentials: true
-        })
-          .then(res => {
-            setMessage(res.data);
-            alert(message);
-          })
-          .catch(() => {
-            setMessage("Sorry bro, not authorized");
-            alert(message);
-          });
+      .then(res => {
+        console.log(res.data);
+        if (res.status === 201) {
+          window.location.href = "/";
+        }
       })
       .catch(() => {
-        setMessage("Something went wrong");
+        console.log("Something went wrong");
       });
   };
 
@@ -105,6 +103,8 @@ export default function SignUp() {
                     id="firstName"
                     label="First Name"
                     autoFocus
+                    value={firstName}
+                    onChange={e => setFirstName(e.target.value)}
                   />
                 </Grid>
                 <Grid item xs={12} sm={6}>
@@ -116,6 +116,23 @@ export default function SignUp() {
                     label="Last Name"
                     name="lastName"
                     autoComplete="lname"
+                    value={lastName}
+                    onChange={e => setLastName(e.target.value)}
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                    variant="outlined"
+                    margin="normal"
+                    required
+                    fullWidth
+                    id="username"
+                    label="Username"
+                    name="username"
+                    autoComplete="username"
+                    autoFocus
+                    value={username}
+                    onChange={e => setUsername(e.target.value)}
                   />
                 </Grid>
                 <Grid item xs={12}>
@@ -127,6 +144,8 @@ export default function SignUp() {
                     label="Email Address"
                     name="email"
                     autoComplete="email"
+                    value={email}
+                    onChange={e => setEmail(e.target.value)}
                   />
                 </Grid>
                 <Grid item xs={12}>
@@ -139,15 +158,17 @@ export default function SignUp() {
                     type="password"
                     id="password"
                     autoComplete="current-password"
+                    value={password}
+                    onChange={e => setPassword(e.target.value)}
                   />
                 </Grid>
               </Grid>
               <Button
-                type="submit"
                 fullWidth
                 variant="contained"
                 color="primary"
                 className={classes.submit}
+                onClick={register}
               >
                 Sign Up
               </Button>
