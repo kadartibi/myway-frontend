@@ -13,7 +13,7 @@ import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import { Link as routerLink } from "react-router-dom";
 import { useState } from "react";
-import Axios from "axios";
+import axios from "axios";
 
 const useStyles = makeStyles(theme => ({
   paper: {
@@ -53,8 +53,9 @@ export default function SignIn() {
   const [message, setMessage] = useState("No message");
 
   const login = () => {
-    console.log("fuck you")
-    Axios.post(
+    console.log(username)
+    console.log(password)
+    axios.post(
       "http://localhost:8080/auth/login",
       {
         username: username,
@@ -64,18 +65,8 @@ export default function SignIn() {
         withCredentials: true
       }
     )
-      .then(() => {
-        Axios.get("http://localhost:3000/recommended", {
-          withCredentials: true
-        })
-          .then(res => {
-            setMessage(res.data);
-            console.log(message);
-          })
-          .catch(() => {
-            setMessage("Sorry bro, not authorized");
-            console.log(message);
-          });
+      .then(res => {
+        console.log(res.data)
       })
       .catch(() => {
         setMessage("Something went wrong");
@@ -123,7 +114,6 @@ export default function SignIn() {
                 onChange={e => setPassword(e.target.value)}
               />
               <Button
-                type="submit"
                 fullWidth
                 variant="contained"
                 color="primary"
