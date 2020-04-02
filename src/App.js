@@ -7,6 +7,7 @@ import NewTrip from "./pages/NewTrip";
 import Completed from "./pages/Completed";
 import SignUp from "./pages/SignUp";
 import SignIn from "./pages/SignIn";
+import UserProfile from "./pages/UserProfile";
 import { Route, Link, BrowserRouter as Router } from "react-router-dom";
 import { PlannedDaysProvider } from "./components/Context/PlannedDaysContext";
 import { NewTripProvider } from "./components/Context/NewTripContext";
@@ -37,6 +38,7 @@ import Toolbar from "@material-ui/core/Toolbar";
 import { MuiPickersUtilsProvider } from "@material-ui/pickers";
 import DateFnsUtils from "@date-io/date-fns";
 import { CompletedTripProvider } from "./components/Context/CompletedTripContext";
+import { UserContext } from "./components/Context/UserContext";
 
 const useStyles = makeStyles({
   list: {
