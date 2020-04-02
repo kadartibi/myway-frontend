@@ -5,27 +5,25 @@ import { server } from "./ServerSelector";
 export const UserContext = createContext();
 
 export const UserProvider = props => {
-  const [username, setUsername] = useState("");
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [email, setEmail] = useState("");
+  const [userName, setUsername] = useState();
+  const [firstName, setFirstName] = useState();
+  const [lastName, setLastName] = useState();
+  const [email, setEmail] = useState();
 
   useEffect(() => {
     Axios.get(server + "/auth/user", {
       withCredentials: true
     }).then(res => {
-      console.log(res.data);
-      setUsername(res.username);
-      setFirstName(res.firstName);
-      setLastName(res.lastName);
-      setEmail(res.email);
+      setUsername(res.data.userName);
+      setFirstName(res.data.firstName);
+      setLastName(res.data.lastName);
+      setEmail(res.data.email);
     }, []);
   });
-
   return (
     <UserContext.Provider
       value={{
-        username,
+        userName,
         setUsername,
         firstName,
         setFirstName,
