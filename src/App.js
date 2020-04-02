@@ -24,6 +24,7 @@ import MenuIcon from "@material-ui/icons/Menu";
 import IconButton from "@material-ui/core/IconButton";
 import AutoRenewIcon from "@material-ui/icons/Autorenew";
 import ExploreIcon from "@material-ui/icons/Explore";
+import LockOpenIcon from '@material-ui/icons/LockOpen';
 
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -77,17 +78,17 @@ export default function App() {
           </ListItemIcon>
           <ListItemText primary="Home" />
         </ListItem>
+        <ListItem button component={Link} to="/sign-in">
+          <ListItemIcon>
+            <LockOpenIcon />
+          </ListItemIcon>
+          <ListItemText primary="Sign in" />
+        </ListItem>
         <ListItem button component={Link} to="/new-trip">
           <ListItemIcon>
             <ExploreIcon />
           </ListItemIcon>
           <ListItemText primary="New trip" />
-        </ListItem>
-        <ListItem button component={Link} to="/sign-up">
-          <ListItemIcon>
-            <ExploreIcon />
-          </ListItemIcon>
-          <ListItemText primary="Sign up" />
         </ListItem>
         <ListItem button component={Link} to="/in-progress">
           <ListItemIcon>
