@@ -5,7 +5,7 @@ import { server } from "./ServerSelector";
 export const UserContext = createContext();
 
 export const UserProvider = props => {
-  const [userName, setUsername] = useState();
+  const [userName, setUsername] = useState("");
   const [firstName, setFirstName] = useState();
   const [lastName, setLastName] = useState();
   const [email, setEmail] = useState();

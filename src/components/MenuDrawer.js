@@ -16,10 +16,9 @@ import ExploreIcon from "@material-ui/icons/Explore";
 import LockOpenIcon from "@material-ui/icons/LockOpen";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
-import React from "react";
-import axios from "axios"
-import { UserContext } from "./components/Context/UserContext";
-
+import React, { useContext } from "react";
+import axios from "axios";
+import { UserContext } from "../components/Context/UserContext";
 
 const useStyles = makeStyles({
   list: {
@@ -31,6 +30,12 @@ const useStyles = makeStyles({
   appbar: {
     background: "transparent",
     boxShadow: "none"
+  },
+  invisible: {
+    visibility: "hidden"
+  },
+  visible: {
+    visibility: "visible"
   }
 });
 
@@ -39,6 +44,8 @@ export default function MenuDrawer() {
   const [state, setState] = React.useState({
     left: false
   });
+
+  const { userName } = useContext(UserContext);
 
   const toggleDrawer = (side, open) => event => {
     if (
@@ -75,38 +82,72 @@ export default function MenuDrawer() {
       onKeyDown={toggleDrawer(side, false)}
     >
       <List>
-        <ListItem button component={Link} to="/sign-in">
+        <ListItem
+          button
+          component={Link}
+          to="/sign-in"
+          className={
+            userName === undefined ? classes.visible : classes.invisible
+          }
+        >
           <ListItemIcon>
             <LockOpenIcon />
           </ListItemIcon>
           <ListItemText primary="Sign in" />
         </ListItem>
-        <ListItem button onClick={logout}>
+        <ListItem
+          button
+          onClick={logout}
+          className={
+            userName !== undefined ? classes.visible : classes.invisible
+          }
+        >
           <ListItemIcon>
             <MeetingRoomIcon />
           </ListItemIcon>
           <ListItemText primary="Logout" />
         </ListItem>
         <Divider />
-        <ListItem button component={Link} to="/">
+        <ListItem button component={Link} to="/" className={classes.visible}>
           <ListItemIcon>
             <HomeIcon />
           </ListItemIcon>
           <ListItemText primary="Home" />
         </ListItem>
-        <ListItem button component={Link} to="/new-trip">
+        <ListItem
+          button
+          component={Link}
+          to="/new-trip"
+          className={
+            userName !== undefined ? classes.visible : classes.invisible
+          }
+        >
           <ListItemIcon>
             <ExploreIcon />
           </ListItemIcon>
           <ListItemText primary="New trip" />
         </ListItem>
-        <ListItem button component={Link} to="/in-progress">
+        <ListItem
+          button
+          component={Link}
+          to="/in-progress"
+          className={
+            userName !== undefined ? classes.visible : classes.invisible
+          }
+        >
           <ListItemIcon>
             <AutoRenewIcon />
           </ListItemIcon>
           <ListItemText primary="In progress" />
         </ListItem>
-        <ListItem button component={Link} to="/completed">
+        <ListItem
+          button
+          component={Link}
+          to="/completed"
+          className={
+            userName !== undefined ? classes.visible : classes.invisible
+          }
+        >
           <ListItemIcon>
             <BeenHereIcon />
           </ListItemIcon>
