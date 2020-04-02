@@ -58,11 +58,10 @@ export default function PlannedDay(props) {
 
   const handlePostRequest = e => {
     e.preventDefault();
-
     axios
       .post(
         "http://localhost:8080/trip/" +
-          day.tripId +
+          day.trip.id +
           "/add-activity-to-day/" +
           day.id,
         {
@@ -101,7 +100,7 @@ export default function PlannedDay(props) {
         <ActivitiesList
           activities={activities}
           setActivities={setActivities}
-          tripId={day.tripId}
+          tripId={day.trip.id}
           dayId={day.id}
           totalCost={totalCost}
           setTotalCost={setTotalCost}
