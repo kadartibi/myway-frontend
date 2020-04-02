@@ -1,4 +1,5 @@
 import React from "react";
+import axios from "axios";
 import "./App.css";
 import Home from "./pages/Home";
 import InProgress from "./pages/InProgress";
@@ -67,6 +68,22 @@ export default function App() {
     setState({ ...state, [side]: open });
   };
 
+  const logout = () => {
+    axios
+      .post("http://localhost:8080/auth/logout", {
+        withCredentials: true
+      })
+      .then(res => {
+        console.log(res.data);
+        /*if (res.status === 200) {
+          window.location.href = "/";
+        }*/
+      })
+      .catch(() => {
+        console.log("something wrong");
+      });
+  };
+
   const sideList = side => (
     <div
       className={classes.list}
@@ -81,7 +98,7 @@ export default function App() {
           </ListItemIcon>
           <ListItemText primary="Sign in" />
         </ListItem>
-        <ListItem button>
+        <ListItem button onClick={logout}>
           <ListItemIcon>
             <MeetingRoomIcon />
           </ListItemIcon>
@@ -119,42 +136,44 @@ export default function App() {
   return (
     <div className="App">
       <UserProvider>
-        <NewTripProvider>
-          <PlannedDaysProvider tripId={"0"}>
-            <InProgressProvider>
-              <RecommendedTripProvider>
-                <Router>
-                  <AppBar position="fixed" className={classes.appbar}>
-                    <Toolbar>
-                      <IconButton
-                        edge="start"
-                        onClick={toggleDrawer("left", true)}
-                        color="inherit"
-                        aria-label="menu"
-                      >
-                        <MenuIcon />
-                      </IconButton>
-                    </Toolbar>
-                  </AppBar>
-                  <Drawer
-                    open={state.left}
-                    onClose={toggleDrawer("left", false)}
-                  >
-                    {sideList("left")}
-                  </Drawer>
-                  <Route exact path="/" component={Home} />
-                  <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                    <Route path="/new-trip" component={NewTrip} />
-                  </MuiPickersUtilsProvider>
-                  <Route path="/sign-up" component={SignUp} />
-                  <Route path="/sign-in" component={SignIn} />
-                  <Route path="/in-progress" component={InProgress} />
-                  <Route path="/completed" component={Completed} />
-                </Router>
-              </RecommendedTripProvider>
-            </InProgressProvider>
-          </PlannedDaysProvider>
-        </NewTripProvider>
+        <CompletedTripProvider>
+          <NewTripProvider>
+            <PlannedDaysProvider tripId={"0"}>
+              <InProgressProvider>
+                <RecommendedTripProvider>
+                  <Router>
+                    <AppBar position="fixed" className={classes.appbar}>
+                      <Toolbar>
+                        <IconButton
+                          edge="start"
+                          onClick={toggleDrawer("left", true)}
+                          color="inherit"
+                          aria-label="menu"
+                        >
+                          <MenuIcon />
+                        </IconButton>
+                      </Toolbar>
+                    </AppBar>
+                    <Drawer
+                      open={state.left}
+                      onClose={toggleDrawer("left", false)}
+                    >
+                      {sideList("left")}
+                    </Drawer>
+                    <Route exact path="/" component={Home} />
+                    <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                      <Route path="/new-trip" component={NewTrip} />
+                    </MuiPickersUtilsProvider>
+                    <Route path="/sign-up" component={SignUp} />
+                    <Route path="/sign-in" component={SignIn} />
+                    <Route path="/in-progress" component={InProgress} />
+                    <Route path="/completed" component={Completed} />
+                  </Router>
+                </RecommendedTripProvider>
+              </InProgressProvider>
+            </PlannedDaysProvider>
+          </NewTripProvider>
+        </CompletedTripProvider>
       </UserProvider>
     </div>
   );

@@ -14,7 +14,6 @@ export const UserProvider = props => {
     Axios.get(server + "/auth/user", {
       withCredentials: true
     }).then(res => {
-      console.log(res.data);
       setUsername(res.username);
       setFirstName(res.firstName);
       setLastName(res.lastName);
