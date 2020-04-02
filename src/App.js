@@ -11,6 +11,7 @@ import { PlannedDaysProvider } from "./components/Context/PlannedDaysContext";
 import { NewTripProvider } from "./components/Context/NewTripContext";
 import { InProgressProvider } from "./components/Context/InProgressContext";
 import { RecommendedTripProvider } from "./components/Context/RecommendedTripContext";
+import { UserProvider } from "./components/Context/UserContext";
 
 import { makeStyles } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
@@ -21,7 +22,7 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import BeenHereIcon from "@material-ui/icons/Beenhere";
 import HomeIcon from "@material-ui/icons/Home";
-import MeetingRoomIcon from '@material-ui/icons/MeetingRoom';
+import MeetingRoomIcon from "@material-ui/icons/MeetingRoom";
 import MenuIcon from "@material-ui/icons/Menu";
 import IconButton from "@material-ui/core/IconButton";
 import AutoRenewIcon from "@material-ui/icons/Autorenew";
@@ -80,7 +81,7 @@ export default function App() {
           </ListItemIcon>
           <ListItemText primary="Sign in" />
         </ListItem>
-        <ListItem button >
+        <ListItem button>
           <ListItemIcon>
             <MeetingRoomIcon />
           </ListItemIcon>
@@ -117,11 +118,11 @@ export default function App() {
 
   return (
     <div className="App">
-      <NewTripProvider>
-        <PlannedDaysProvider tripId={"0"}>
-          <InProgressProvider>
-            <RecommendedTripProvider>
-              <CompletedTripProvider>
+      <UserProvider>
+        <NewTripProvider>
+          <PlannedDaysProvider tripId={"0"}>
+            <InProgressProvider>
+              <RecommendedTripProvider>
                 <Router>
                   <AppBar position="fixed" className={classes.appbar}>
                     <Toolbar>
@@ -150,11 +151,11 @@ export default function App() {
                   <Route path="/in-progress" component={InProgress} />
                   <Route path="/completed" component={Completed} />
                 </Router>
-              </CompletedTripProvider>
-            </RecommendedTripProvider>
-          </InProgressProvider>
-        </PlannedDaysProvider>
-      </NewTripProvider>
+              </RecommendedTripProvider>
+            </InProgressProvider>
+          </PlannedDaysProvider>
+        </NewTripProvider>
+      </UserProvider>
     </div>
   );
 }
