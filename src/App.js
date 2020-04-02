@@ -11,6 +11,7 @@ import { PlannedDaysProvider } from "./components/Context/PlannedDaysContext";
 import { NewTripProvider } from "./components/Context/NewTripContext";
 import { InProgressProvider } from "./components/Context/InProgressContext";
 import { RecommendedTripProvider } from "./components/Context/RecommendedTripContext";
+import { UserProvider } from "./components/Context/UserContext";
 
 import { makeStyles } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
@@ -106,39 +107,44 @@ export default function App() {
 
   return (
     <div className="App">
-      <NewTripProvider>
-        <PlannedDaysProvider tripId={"0"}>
-          <InProgressProvider>
-            <RecommendedTripProvider>
-              <Router>
-                <AppBar position="fixed" className={classes.appbar}>
-                  <Toolbar>
-                    <IconButton
-                      edge="start"
-                      onClick={toggleDrawer("left", true)}
-                      color="inherit"
-                      aria-label="menu"
-                    >
-                      <MenuIcon />
-                    </IconButton>
-                  </Toolbar>
-                </AppBar>
-                <Drawer open={state.left} onClose={toggleDrawer("left", false)}>
-                  {sideList("left")}
-                </Drawer>
-                <Route exact path="/" component={Home} />
-                <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                  <Route path="/new-trip" component={NewTrip} />
-                </MuiPickersUtilsProvider>
-                <Route path="/sign-up" component={SignUp} />
-                <Route path="/sign-in" component={SignIn} />
-                <Route path="/in-progress" component={InProgress} />
-                <Route path="/completed" component={Completed} />
-              </Router>
-            </RecommendedTripProvider>
-          </InProgressProvider>
-        </PlannedDaysProvider>
-      </NewTripProvider>
+      <UserProvider>
+        <NewTripProvider>
+          <PlannedDaysProvider tripId={"0"}>
+            <InProgressProvider>
+              <RecommendedTripProvider>
+                <Router>
+                  <AppBar position="fixed" className={classes.appbar}>
+                    <Toolbar>
+                      <IconButton
+                        edge="start"
+                        onClick={toggleDrawer("left", true)}
+                        color="inherit"
+                        aria-label="menu"
+                      >
+                        <MenuIcon />
+                      </IconButton>
+                    </Toolbar>
+                  </AppBar>
+                  <Drawer
+                    open={state.left}
+                    onClose={toggleDrawer("left", false)}
+                  >
+                    {sideList("left")}
+                  </Drawer>
+                  <Route exact path="/" component={Home} />
+                  <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                    <Route path="/new-trip" component={NewTrip} />
+                  </MuiPickersUtilsProvider>
+                  <Route path="/sign-up" component={SignUp} />
+                  <Route path="/sign-in" component={SignIn} />
+                  <Route path="/in-progress" component={InProgress} />
+                  <Route path="/completed" component={Completed} />
+                </Router>
+              </RecommendedTripProvider>
+            </InProgressProvider>
+          </PlannedDaysProvider>
+        </NewTripProvider>
+      </UserProvider>
     </div>
   );
 }
