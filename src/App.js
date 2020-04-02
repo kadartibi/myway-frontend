@@ -16,15 +16,17 @@ import { makeStyles } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
+import Divider from "@material-ui/core/Divider";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import BeenHereIcon from "@material-ui/icons/Beenhere";
 import HomeIcon from "@material-ui/icons/Home";
+import MeetingRoomIcon from '@material-ui/icons/MeetingRoom';
 import MenuIcon from "@material-ui/icons/Menu";
 import IconButton from "@material-ui/core/IconButton";
 import AutoRenewIcon from "@material-ui/icons/Autorenew";
 import ExploreIcon from "@material-ui/icons/Explore";
-import LockOpenIcon from '@material-ui/icons/LockOpen';
+import LockOpenIcon from "@material-ui/icons/LockOpen";
 
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -72,17 +74,24 @@ export default function App() {
       onKeyDown={toggleDrawer(side, false)}
     >
       <List>
-        <ListItem button component={Link} to="/">
-          <ListItemIcon>
-            <HomeIcon />
-          </ListItemIcon>
-          <ListItemText primary="Home" />
-        </ListItem>
         <ListItem button component={Link} to="/sign-in">
           <ListItemIcon>
             <LockOpenIcon />
           </ListItemIcon>
           <ListItemText primary="Sign in" />
+        </ListItem>
+        <ListItem button >
+          <ListItemIcon>
+            <MeetingRoomIcon />
+          </ListItemIcon>
+          <ListItemText primary="Logout" />
+        </ListItem>
+        <Divider />
+        <ListItem button component={Link} to="/">
+          <ListItemIcon>
+            <HomeIcon />
+          </ListItemIcon>
+          <ListItemText primary="Home" />
         </ListItem>
         <ListItem button component={Link} to="/new-trip">
           <ListItemIcon>
@@ -114,30 +123,33 @@ export default function App() {
             <RecommendedTripProvider>
               <CompletedTripProvider>
                 <Router>
-                <AppBar position="fixed" className={classes.appbar}>
-                  <Toolbar>
-                    <IconButton
-                      edge="start"
-                      onClick={toggleDrawer("left", true)}
-                      color="inherit"
-                      aria-label="menu"
-                    >
-                      <MenuIcon />
-                    </IconButton>
-                  </Toolbar>
-                </AppBar>
-                <Drawer open={state.left} onClose={toggleDrawer("left", false)}>
-                  {sideList("left")}
-                </Drawer>
-                <Route exact path="/" component={Home} />
-                <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                  <Route path="/new-trip" component={NewTrip} />
-                </MuiPickersUtilsProvider>
-                <Route path="/sign-up" component={SignUp} />
-                <Route path="/sign-in" component={SignIn} />
-                <Route path="/in-progress" component={InProgress} />
-                <Route path="/completed" component={Completed} />
-              </Router>
+                  <AppBar position="fixed" className={classes.appbar}>
+                    <Toolbar>
+                      <IconButton
+                        edge="start"
+                        onClick={toggleDrawer("left", true)}
+                        color="inherit"
+                        aria-label="menu"
+                      >
+                        <MenuIcon />
+                      </IconButton>
+                    </Toolbar>
+                  </AppBar>
+                  <Drawer
+                    open={state.left}
+                    onClose={toggleDrawer("left", false)}
+                  >
+                    {sideList("left")}
+                  </Drawer>
+                  <Route exact path="/" component={Home} />
+                  <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                    <Route path="/new-trip" component={NewTrip} />
+                  </MuiPickersUtilsProvider>
+                  <Route path="/sign-up" component={SignUp} />
+                  <Route path="/sign-in" component={SignIn} />
+                  <Route path="/in-progress" component={InProgress} />
+                  <Route path="/completed" component={Completed} />
+                </Router>
               </CompletedTripProvider>
             </RecommendedTripProvider>
           </InProgressProvider>
