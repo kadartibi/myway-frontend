@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Box from "@material-ui/core/Box";
 import CardActions from "@material-ui/core/CardActions";
@@ -12,6 +12,7 @@ import ActivitiesList from "./ActivitiesList";
 import Avatar from "@material-ui/core/Avatar";
 import DateRangeIcon from "@material-ui/icons/DateRange";
 import axios from "axios";
+import { UserContext } from "../components/Context/UserContext";
 
 const useStyles = makeStyles({
   root: {
@@ -28,6 +29,12 @@ const useStyles = makeStyles({
   },
   inactivePointer: {
     cursor: "default"
+  },
+  invisible: {
+    visibility: "hidden"
+  },
+  visible: {
+    visibility: "visible"
   }
 });
 
@@ -38,6 +45,7 @@ export default function PlannedDay(props) {
   const [day, setDay] = useState(props.day);
   const [activities, setActivities] = useState(props.day.activities);
   const [totalCost, setTotalCost] = useState(props.day.totalCost);
+  const { userName } = useContext(UserContext);
 
   const addActivityDescription = e => {
     setActivityDescriptionInput(e.target.value);
@@ -110,7 +118,9 @@ export default function PlannedDay(props) {
         </Typography>
       </CardContent>
       <Divider />
-      <CardContent className={classes.form}>
+      <CardContent
+        className={userName !== undefined ? classes.visible : classes.invisible}
+      >
         <form noValidate autoComplete="off" onSubmit={handlePostRequest}>
           <Input
             id="standard-basic"
