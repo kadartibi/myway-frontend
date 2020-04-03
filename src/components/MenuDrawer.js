@@ -112,15 +112,13 @@ export default function MenuDrawer() {
           <ListItemIcon>
             <HomeIcon />
           </ListItemIcon>
-          <ListItemText primary="Home" />
+          <ListItemText primary="Home" onClick={console.log(userName)} />
         </ListItem>
         <ListItem
           button
           component={Link}
           to="/new-trip"
-          className={
-            userName !== undefined ? classes.visible : classes.invisible
-          }
+          className={classes.visible}
         >
           <ListItemIcon>
             <ExploreIcon />
@@ -131,9 +129,7 @@ export default function MenuDrawer() {
           button
           component={Link}
           to="/in-progress"
-          className={
-            userName !== undefined ? classes.visible : classes.invisible
-          }
+          className={classes.visible}
         >
           <ListItemIcon>
             <AutoRenewIcon />
@@ -144,9 +140,7 @@ export default function MenuDrawer() {
           button
           component={Link}
           to="/completed"
-          className={
-            userName !== undefined ? classes.visible : classes.invisible
-          }
+          className={classes.visible}
         >
           <ListItemIcon>
             <BeenHereIcon />
