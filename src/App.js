@@ -13,7 +13,7 @@ import { NewTripProvider } from "./components/Context/NewTripContext";
 import { InProgressProvider } from "./components/Context/InProgressContext";
 import { RecommendedTripProvider } from "./components/Context/RecommendedTripContext";
 import { UserProvider } from "./components/Context/UserContext";
-import MenuDrawer from "./components/MenuDrawer"
+import MenuDrawer from "./components/MenuDrawer";
 
 //datepicker
 import { MuiPickersUtilsProvider } from "@material-ui/pickers";
@@ -30,7 +30,7 @@ export default function App() {
               <InProgressProvider>
                 <RecommendedTripProvider>
                   <Router>
-                    <MenuDrawer/>
+                    <MenuDrawer />
                     <Route exact path="/" component={Home} />
                     <MuiPickersUtilsProvider utils={DateFnsUtils}>
                       <Route path="/new-trip" component={NewTrip} />
@@ -39,6 +39,7 @@ export default function App() {
                     <Route path="/sign-in" component={SignIn} />
                     <Route path="/in-progress" component={InProgress} />
                     <Route path="/completed" component={Completed} />
+                    <Route path="/user" component={UserProfile} />
                   </Router>
                 </RecommendedTripProvider>
               </InProgressProvider>

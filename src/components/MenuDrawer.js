@@ -74,82 +74,75 @@ export default function MenuDrawer() {
       });
   };
 
-  const sideList = side => (
-    <div
-      className={classes.list}
-      role="presentation"
-      onClick={toggleDrawer(side, false)}
-      onKeyDown={toggleDrawer(side, false)}
-    >
+  const sideList = side =>
+    userName === undefined ? (
       <List>
-        <ListItem
-          button
-          component={Link}
-          to="/sign-in"
-          className={
-            userName === undefined ? classes.visible : classes.invisible
-          }
+        <div
+          className={classes.list}
+          role="presentation"
+          onClick={toggleDrawer(side, false)}
+          onKeyDown={toggleDrawer(side, false)}
         >
-          <ListItemIcon>
-            <LockOpenIcon />
-          </ListItemIcon>
-          <ListItemText primary="Sign in" />
-        </ListItem>
-        <ListItem
-          button
-          onClick={logout}
-          className={
-            userName !== undefined ? classes.visible : classes.invisible
-          }
-        >
-          <ListItemIcon>
-            <MeetingRoomIcon />
-          </ListItemIcon>
-          <ListItemText primary="Logout" />
-        </ListItem>
-        <Divider />
-        <ListItem button component={Link} to="/" className={classes.visible}>
-          <ListItemIcon>
-            <HomeIcon />
-          </ListItemIcon>
-          <ListItemText primary="Home" onClick={console.log(userName)} />
-        </ListItem>
-        <ListItem
-          button
-          component={Link}
-          to="/new-trip"
-          className={classes.visible}
-        >
-          <ListItemIcon>
-            <ExploreIcon />
-          </ListItemIcon>
-          <ListItemText primary="New trip" />
-        </ListItem>
-        <ListItem
-          button
-          component={Link}
-          to="/in-progress"
-          className={classes.visible}
-        >
-          <ListItemIcon>
-            <AutoRenewIcon />
-          </ListItemIcon>
-          <ListItemText primary="In progress" />
-        </ListItem>
-        <ListItem
-          button
-          component={Link}
-          to="/completed"
-          className={classes.visible}
-        >
-          <ListItemIcon>
-            <BeenHereIcon />
-          </ListItemIcon>
-          <ListItemText primary="Completed trips" />
-        </ListItem>
+          <ListItem button component={Link} to="/sign-in">
+            <ListItemIcon>
+              <LockOpenIcon />
+            </ListItemIcon>
+            <ListItemText primary="Sign in" />
+          </ListItem>
+          <Divider />
+          <ListItem button component={Link} to="/">
+            <ListItemIcon>
+              <HomeIcon />
+            </ListItemIcon>
+            <ListItemText primary="Home" />
+          </ListItem>
+        </div>
       </List>
-    </div>
-  );
+    ) : (
+      <List>
+        <div
+          className={classes.list}
+          role="presentation"
+          onClick={toggleDrawer(side, false)}
+          onKeyDown={toggleDrawer(side, false)}
+        >
+          <ListItem button component={Link} to="/user">
+            <ListItemText primary={"You logged in as:" + userName} />
+          </ListItem>
+          <ListItem button onClick={logout}>
+            <ListItemIcon>
+              <MeetingRoomIcon />
+            </ListItemIcon>
+            <ListItemText primary="Logout" />
+          </ListItem>
+          <Divider />
+          <ListItem button component={Link} to="/">
+            <ListItemIcon>
+              <HomeIcon />
+            </ListItemIcon>
+            <ListItemText primary="Home" />
+          </ListItem>
+          <ListItem button component={Link} to="/new-trip">
+            <ListItemIcon>
+              <ExploreIcon />
+            </ListItemIcon>
+            <ListItemText primary="New trip" />
+          </ListItem>
+          <ListItem button component={Link} to="/in-progress">
+            <ListItemIcon>
+              <AutoRenewIcon />
+            </ListItemIcon>
+            <ListItemText primary="In progress" />
+          </ListItem>
+          <ListItem button component={Link} to="/completed">
+            <ListItemIcon>
+              <BeenHereIcon />
+            </ListItemIcon>
+            <ListItemText primary="Completed trips" />
+          </ListItem>
+        </div>
+      </List>
+    );
 
   return (
     <div>
