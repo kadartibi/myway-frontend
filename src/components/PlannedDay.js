@@ -91,7 +91,34 @@ export default function PlannedDay(props) {
     updateTotalCost();
   });
 
-  return (
+  return userName === undefined ? (
+    <Box boxShadow={5} className={classes.root}>
+      <CardHeader
+        className={classes.inactivePointer}
+        titleTypographyProps={{ variant: "h5" }}
+        title={day.date}
+        avatar={
+          <Avatar>
+            <DateRangeIcon />
+          </Avatar>
+        }
+      />
+      <Divider />
+      <CardContent className={classes.display}>
+        <ActivitiesList
+          activities={activities}
+          setActivities={setActivities}
+          tripId={day.trip.id}
+          dayId={day.id}
+          totalCost={totalCost}
+          setTotalCost={setTotalCost}
+        />
+        <Typography className={classes.inactivePointer} variant="h6">
+          Total: {totalCost} $
+        </Typography>
+      </CardContent>
+    </Box>
+  ) : (
     <Box boxShadow={5} className={classes.root}>
       <CardHeader
         className={classes.inactivePointer}
@@ -118,9 +145,7 @@ export default function PlannedDay(props) {
         </Typography>
       </CardContent>
       <Divider />
-      <CardContent
-        className={userName !== undefined ? classes.visible : classes.invisible}
-      >
+      <CardContent>
         <form noValidate autoComplete="off" onSubmit={handlePostRequest}>
           <Input
             id="standard-basic"
