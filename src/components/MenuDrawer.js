@@ -59,15 +59,16 @@ export default function MenuDrawer() {
   };
 
   const logout = () => {
+    axios.defaults.withCredentials = true;
     axios
       .post("http://localhost:8080/auth/logout", {
         withCredentials: true
       })
       .then(res => {
         console.log(res.data);
-        /*if (res.status === 200) {
+        if (res.status === 200) {
             window.location.href = "/";
-          }*/
+          }
       })
       .catch(() => {
         console.log("something wrong");
@@ -107,7 +108,7 @@ export default function MenuDrawer() {
           onKeyDown={toggleDrawer(side, false)}
         >
           <ListItem button component={Link} to="/user">
-            <ListItemText primary={"You logged in as:" + userName} />
+            <ListItemText primary={"You logged in as: " + userName} />
           </ListItem>
           <ListItem button onClick={logout}>
             <ListItemIcon>
