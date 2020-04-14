@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import Card from "@material-ui/core/Card";
+import Box from "@material-ui/core/Box";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import CardHeader from "@material-ui/core/CardHeader";
@@ -12,6 +12,7 @@ import ActivitiesList from "./ActivitiesList";
 import Avatar from "@material-ui/core/Avatar";
 import DateRangeIcon from "@material-ui/icons/DateRange";
 import axios from "axios";
+import { UserContext } from "../components/Context/UserContext";
 
 const useStyles = makeStyles({
   root: {
@@ -25,6 +26,15 @@ const useStyles = makeStyles({
   action: {
     width: "115px",
     margin: "auto"
+  },
+  inactivePointer: {
+    cursor: "default"
+  },
+  invisible: {
+    visibility: "hidden"
+  },
+  visible: {
+    visibility: "visible"
   }
 });
 
@@ -34,6 +44,8 @@ export default function PlannedDay(props) {
   const [priceInput, setPriceInput] = useState();
   const [day, setDay] = useState(props.day);
   const [activities, setActivities] = useState(props.day.activities);
+  const [totalCost, setTotalCost] = useState(props.day.totalCost);
+  const { userName } = useContext(UserContext);
 
   const addActivityDescription = e => {
     setActivityDescriptionInput(e.target.value);
@@ -43,15 +55,30 @@ export default function PlannedDay(props) {
     setPriceInput(e.target.value);
   };
 
+  const updateTotalCost = () => {
+    let sumResult = 0;
+    for (let activity of activities) {
+      sumResult += activity.price;
+    }
+    setTotalCost(sumResult);
+    return sumResult;
+  };
+
   const handlePostRequest = e => {
     e.preventDefault();
-
     axios
-      .post("http://localhost:8080/trip/0/add-activity-to-day/0", {
-        description: activityDescriptionInput,
-        price: priceInput
-      })
+      .post(
+        "http://localhost:8080/trip/" +
+          day.trip.id +
+          "/add-activity-to-day/" +
+          day.id,
+        {
+          description: activityDescriptionInput,
+          price: priceInput
+        }
+      )
       .then(function(response) {
+        setTotalCost(Number(totalCost) + Number(priceInput));
         setDay(response.data);
         setActivities(response.data.activities);
       })
@@ -60,9 +87,14 @@ export default function PlannedDay(props) {
       });
   };
 
-  return (
-    <Card className={classes.root}>
+  useEffect(() => {
+    updateTotalCost();
+  });
+
+  return userName === undefined ? (
+    <Box boxShadow={5} className={classes.root}>
       <CardHeader
+        className={classes.inactivePointer}
         titleTypographyProps={{ variant: "h5" }}
         title={day.date}
         avatar={
@@ -76,25 +108,59 @@ export default function PlannedDay(props) {
         <ActivitiesList
           activities={activities}
           setActivities={setActivities}
-          tripId={day.tripId}
+          tripId={day.trip.id}
           dayId={day.id}
+          totalCost={totalCost}
+          setTotalCost={setTotalCost}
         />
-        <Typography variant="h6">Total: {day.totalCost} $</Typography>
+        <Typography className={classes.inactivePointer} variant="h6">
+          Total: {totalCost} $
+        </Typography>
+      </CardContent>
+    </Box>
+  ) : (
+    <Box boxShadow={5} className={classes.root}>
+      <CardHeader
+        className={classes.inactivePointer}
+        titleTypographyProps={{ variant: "h5" }}
+        title={day.date}
+        avatar={
+          <Avatar>
+            <DateRangeIcon />
+          </Avatar>
+        }
+      />
+      <Divider />
+      <CardContent className={classes.display}>
+        <ActivitiesList
+          activities={activities}
+          setActivities={setActivities}
+          tripId={day.trip.id}
+          dayId={day.id}
+          totalCost={totalCost}
+          setTotalCost={setTotalCost}
+        />
+        <Typography className={classes.inactivePointer} variant="h6">
+          Total: {totalCost} $
+        </Typography>
       </CardContent>
       <Divider />
-      <CardContent className={classes.form}>
+      <CardContent>
         <form noValidate autoComplete="off" onSubmit={handlePostRequest}>
           <Input
             id="standard-basic"
-            value={null}
+            className="PlannedDayInputField"
             placeholder="Activity"
             onChange={addActivityDescription}
+            required
           />
           <Input
+            type="number"
             id="standard-basic"
-            value={null}
+            className="PlannedDayInputField"
             placeholder="Price"
             onChange={addPrice}
+            required
           />
           <CardActions className={classes.action}>
             <Button variant="outlined" size="small" type="submit">
@@ -103,6 +169,6 @@ export default function PlannedDay(props) {
           </CardActions>
         </form>
       </CardContent>
-    </Card>
+    </Box>
   );
 }

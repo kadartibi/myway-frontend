@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
-import PlannedDay from "../components/PlannedDay";
-import { PlannedDaysContext } from "../components/Context/PlannedDaysContext";
+import PlannedDay from "./PlannedDay";
+import { PlannedDaysContext } from "./Context/PlannedDaysContext";
 
 import { makeStyles } from "@material-ui/core";
 import CircularProgress from "@material-ui/core/CircularProgress";
@@ -13,18 +13,18 @@ const useStyles = makeStyles(theme => ({
   },
   backdrop: {
     zIndex: theme.zIndex.drawer + 1,
-    color: '#fff',
+    color: "#fff"
   }
 }));
 
-export default function Test() {
+export default function GeneratePlannedDays() {
   const [plannedDays] = useContext(PlannedDaysContext);
   const classes = useStyles();
 
   return plannedDays ? (
     <div className={classes.root}>
       {plannedDays.map(day => (
-        <PlannedDay day={day} />
+        <PlannedDay key={day.id} day={day} />
       ))}
     </div>
   ) : (

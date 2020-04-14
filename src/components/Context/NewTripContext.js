@@ -11,22 +11,42 @@ export const NewTripProvider = props => {
   const [dateOfDeparture, setDateOfDeparture] = useState("");
   const [dateOfReturn, setDateOfReturn] = useState("");
   const [travelType, setTravelType] = useState([]);
+  const [errorMessage, setErrorMessage] = useState();
   const sendToServer = () => {
     axios
-      .post(server + "/trip/add", {
-        name: tripName,
-        country: country,
-        city: city,
-        dateOfDeparture: dateOfDeparture,
-        dateOfReturn: dateOfReturn,
-        travelTypeList: travelType
+      .post(
+        server + "/trip/add",
+        {
+          name: tripName,
+          country: country,
+          city: city,
+          dateOfDeparture: dateOfDeparture,
+          dateOfReturn: dateOfReturn,
+          travelTypes: travelType
+          // add user later
+        },
+        {
+          withCredentials: true
+        }
+      )
+      .then(response => {
+        setErrorMessage(null);
+        if (response.status === 200) {
+          window.location.href = "/in-progress";
+        }
       })
-      .then((window.location.href = "/"));
+      .catch(function(error) {
+        let errorList = [];
+        error.response.data.errors.forEach(element => {
+          errorList.push(" " + element.defaultMessage);
+        });
+        setErrorMessage(errorList);
+      });
   };
 
   return (
     <NewTripContext.Provider
-      value={[
+      value={{
         tripName,
         setTripName,
         country,
@@ -39,8 +59,10 @@ export const NewTripProvider = props => {
         setDateOfReturn,
         travelType,
         setTravelType,
-        sendToServer
-      ]}
+        sendToServer,
+        errorMessage,
+        setErrorMessage
+      }}
     >
       {props.children}
     </NewTripContext.Provider>

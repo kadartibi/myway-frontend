@@ -1,7 +1,6 @@
 import React, { useContext } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
-import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
@@ -9,10 +8,11 @@ import KeyboardDatePickerTest from "./DatePicker";
 import CheckboxLabels from "./TravelTypeCheckbox";
 import { NewTripContext } from "./Context/NewTripContext";
 import Grid from "@material-ui/core/Grid";
+import NewTripErrorHandler from "./NewTripErrorHandler";
 
 const useStyles = makeStyles({
   root: {
-    marginTop: "100px",
+    marginTop: "50px",
     margin: "auto",
     maxWidth: "50%",
     minWidth: "300",
@@ -24,30 +24,13 @@ const useStyles = makeStyles({
 });
 
 export const AddNewTripForm = () => {
-  const [
-    tripName,
-    setTripName,
-    country,
-    setCountry,
-    city,
-    setCity,
-    dateOfDeparture,
-    setDateOfDeparture,
-    dateOfReturn,
-    setDateOfReturn,
-    travelType,
-    setTravelType,
-    sendToServer
-  ] = useContext(NewTripContext);
+  const { setTripName, setCountry, setCity, sendToServer } = useContext(NewTripContext);
   const classes = useStyles();
-
-  const buttonOnclick = e => {
-    window.location.href = "/in-progress";
-  };
 
   return (
     <div>
       <React.Fragment>
+        <NewTripErrorHandler />
         <Card className={classes.root}>
           <CardContent className={classes.content}>
             <Grid container spacing={3}>
@@ -55,20 +38,21 @@ export const AddNewTripForm = () => {
                 <h3> Trip details:</h3>
                 <form noValidate autoComplete="off">
                   <TextField
+                    required
                     className="tripInput"
                     id="standard-basic"
                     label="Trip name"
-                    value={null}
                     onChange={e => {
                       setTripName(e.target.value);
                     }}
+                    onSubmit={e => (e.target.value = null)}
                   />
                   <br />
                   <TextField
+                    required
                     className="tripInput"
                     id="standard-basic"
                     label="Country"
-                    value={null}
                     onChange={e => {
                       setCountry(e.target.value);
                     }}

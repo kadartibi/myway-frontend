@@ -10,7 +10,9 @@ export function PlannedDaysProvider(props) {
 
   useEffect(() => {
     axios
-      .get(server + "/trip/" + tripId + "/list-all-days")
+      .get(server + "/trip/" + tripId + "/list-all-days", {
+        withCredentials: true
+      })
       .then(res => setPlannedDays(res.data));
   }, [tripId]);
 
