@@ -116,6 +116,12 @@ export default function MenuDrawer() {
             </ListItemIcon>
             <ListItemText primary="Logout" />
           </ListItem>
+          <ListItem button component={Link} to="/admin">
+            <ListItemIcon>
+              <HomeIcon />
+            </ListItemIcon>
+            <ListItemText primary="Admin" />
+          </ListItem>
           <Divider />
           <ListItem button component={Link} to="/">
             <ListItemIcon>
