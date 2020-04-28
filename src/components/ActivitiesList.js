@@ -26,7 +26,7 @@ export default function Activities(props) {
   const handleActivitiesPost = activity => {
     axios
       .post(
-        "http://localhost:8080/trip/" +
+        "http://localhost:8762/trip/" +
           tripId +
           "/delete-from-activities/" +
           dayId,

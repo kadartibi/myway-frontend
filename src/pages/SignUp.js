@@ -56,7 +56,7 @@ export default function SignUp() {
 
   const register = () => {
     Axios.post(
-      "http://localhost:8762/auth/signup",
+      "http://localhost:8762/signup",
       {
         username,
         password,
