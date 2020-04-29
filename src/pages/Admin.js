@@ -63,10 +63,8 @@ const useStyles = makeStyles({
 export default function Admin() {
   const classes = useStyles();
   const{ allUsers, deleteUser } = useContext(AdminContext);
-  console.log(allUsers)
-  
 
-  return allUsers === undefined ? (<h2>WAAAAAAIIIIIT</h2>): (
+  return allUsers === undefined ? (<h2>Loading...</h2>): (
     <Card className={classes.root}>
     <TableContainer component={Paper}>
       <Table className={classes.table} aria-label="customized table">
@@ -88,7 +86,7 @@ export default function Admin() {
                   color="secondary"
                   className={classes.button}
                   startIcon={<DeleteIcon />}
-                  onClick={deleteUser(user.userName)}
+                  onClick={()=>(deleteUser(user.userName))}
                 >
                   Delete
                 </Button>

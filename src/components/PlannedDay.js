@@ -46,6 +46,7 @@ export default function PlannedDay(props) {
   const [activities, setActivities] = useState(props.day.activities);
   const [totalCost, setTotalCost] = useState(props.day.totalCost);
   const { userName } = useContext(UserContext);
+  const inRecommended = props.inRecommended;
 
   const addActivityDescription = e => {
     setActivityDescriptionInput(e.target.value);
@@ -91,7 +92,7 @@ export default function PlannedDay(props) {
     updateTotalCost();
   });
 
-  return userName === undefined ? (
+  return userName === undefined || inRecommended ? (
     <Box boxShadow={5} className={classes.root}>
       <CardHeader
         className={classes.inactivePointer}

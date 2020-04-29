@@ -14,6 +14,7 @@ import IconButton from "@material-ui/core/IconButton";
 import AutoRenewIcon from "@material-ui/icons/Autorenew";
 import ExploreIcon from "@material-ui/icons/Explore";
 import LockOpenIcon from "@material-ui/icons/LockOpen";
+import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import React, { useContext } from "react";
@@ -22,32 +23,32 @@ import { UserContext } from "../components/Context/UserContext";
 
 const useStyles = makeStyles({
   list: {
-    width: 250
+    width: 250,
   },
   fullList: {
-    width: "auto"
+    width: "auto",
   },
   appbar: {
     background: "transparent",
-    boxShadow: "none"
+    boxShadow: "none",
   },
   invisible: {
-    visibility: "hidden"
+    visibility: "hidden",
   },
   visible: {
-    visibility: "visible"
-  }
+    visibility: "visible",
+  },
 });
 
 export default function MenuDrawer() {
   const classes = useStyles();
   const [state, setState] = React.useState({
-    left: false
+    left: false,
   });
 
   const { userName } = useContext(UserContext);
 
-  const toggleDrawer = (side, open) => event => {
+  const toggleDrawer = (side, open) => (event) => {
     if (
       event.type === "keydown" &&
       (event.key === "Tab" || event.key === "Shift")
@@ -62,20 +63,20 @@ export default function MenuDrawer() {
     axios.defaults.withCredentials = true;
     axios
       .post("http://localhost:8762/logout/", {
-        withCredentials: true
+        withCredentials: true,
       })
-      .then(res => {
+      .then((res) => {
         console.log(res.data);
         if (res.status === 200) {
-            window.location.href = "/";
-          }
+          window.location.href = "/";
+        }
       })
       .catch(() => {
         console.log("something wrong");
       });
   };
 
-  const sideList = side =>
+  const sideList = (side) =>
     userName === undefined ? (
       <List>
         <div
@@ -116,12 +117,14 @@ export default function MenuDrawer() {
             </ListItemIcon>
             <ListItemText primary="Logout" />
           </ListItem>
-          <ListItem button component={Link} to="/admin">
-            <ListItemIcon>
-              <HomeIcon />
-            </ListItemIcon>
-            <ListItemText primary="Admin" />
-          </ListItem>
+          {userName === "admin" ? (
+            <ListItem button component={Link} to="/admin">
+              <ListItemIcon>
+                <SupervisorAccountIcon />
+              </ListItemIcon>
+              <ListItemText primary="Admin" />
+            </ListItem>
+          ) : null}
           <Divider />
           <ListItem button component={Link} to="/">
             <ListItemIcon>

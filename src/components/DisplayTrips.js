@@ -1,5 +1,6 @@
-import React  from "react";
+import React, { useContext } from "react";
 import Trip from "./Trip";
+import CopyTripButton from "../components/CopyTripButton";
 import Grid from "@material-ui/core/Grid";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import { makeStyles } from "@material-ui/core";
@@ -10,33 +11,36 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import Backdrop from "@material-ui/core/Backdrop";
 import GeneratePlannedDays from "./GeneratePlannedDays";
 import { PlannedDaysProvider } from "./Context/PlannedDaysContext";
+import { UserContext } from "../components/Context/UserContext";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   panel: {
-    marginBottom: "10px"
+    marginBottom: "10px",
   },
   heading: {
     fontSize: theme.typography.pxToRem(15),
-    fontWeight: theme.typography.fontWeightRegular
+    fontWeight: theme.typography.fontWeightRegular,
   },
   travelTypes: {
-      cursor: "pointer",
-      minWidth: 1000,
-      maxWidth: 1000,
+    cursor: "pointer",
+    minWidth: 1000,
+    maxWidth: 1000,
   },
   backdrop: {
     zIndex: theme.zIndex.drawer + 1,
-    color: "#fff"
-  }
+    color: "#fff",
+  },
 }));
 
 function RecommendedTrips(props) {
+  const { userName } = useContext(UserContext);
   const trips = props.trips;
+  const inRecommended = props.inRecommended;
   const classes = useStyles();
 
   return trips.length !== 0 ? (
     <Grid container justify="center">
-      {trips.map(trip => (
+      {trips.map((trip) => (
         <ExpansionPanel className={classes.panel} key={trip.id}>
           <ExpansionPanelSummary
             expandIcon={<ExpandMoreIcon />}
@@ -49,14 +53,17 @@ function RecommendedTrips(props) {
           </ExpansionPanelSummary>
           <ExpansionPanelDetails>
             <PlannedDaysProvider tripId={trip.id}>
-              <GeneratePlannedDays/>
+              <GeneratePlannedDays inRecommended={inRecommended} />
             </PlannedDaysProvider>
           </ExpansionPanelDetails>
+          {inRecommended && userName !== undefined ? (
+            <CopyTripButton trip={trip} />
+          ) : null}
         </ExpansionPanel>
       ))}
     </Grid>
   ) : (
-    <h2>No trips to display yet</h2>  
+    <h2>No trips to display yet</h2>
   );
 }
 

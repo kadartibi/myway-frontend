@@ -44,7 +44,7 @@ export default function Home() {
           Here are the best ones so far!
         </Typography>
       </div>
-      <DisplayTrips trips={trips} class={classes.root} />
+      <DisplayTrips trips={trips} inRecommended={true} class={classes.root} />
     </div>
   );
 }
