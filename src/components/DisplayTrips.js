@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import Trip from "./Trip";
 import CopyTripButton from "../components/CopyTripButton";
 import Grid from "@material-ui/core/Grid";
@@ -11,6 +11,7 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import Backdrop from "@material-ui/core/Backdrop";
 import GeneratePlannedDays from "./GeneratePlannedDays";
 import { PlannedDaysProvider } from "./Context/PlannedDaysContext";
+import { UserContext } from "../components/Context/UserContext";
 
 const useStyles = makeStyles((theme) => ({
   panel: {
@@ -32,6 +33,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function RecommendedTrips(props) {
+  const { userName } = useContext(UserContext);
   const trips = props.trips;
   const inRecommended = props.inRecommended;
   const classes = useStyles();
@@ -51,10 +53,12 @@ function RecommendedTrips(props) {
           </ExpansionPanelSummary>
           <ExpansionPanelDetails>
             <PlannedDaysProvider tripId={trip.id}>
-              <GeneratePlannedDays inRecommended={inRecommended}/>
+              <GeneratePlannedDays inRecommended={inRecommended} />
             </PlannedDaysProvider>
           </ExpansionPanelDetails>
-          {inRecommended ? <CopyTripButton trip={trip} /> : null}          
+          {inRecommended && userName !== undefined ? (
+            <CopyTripButton trip={trip} />
+          ) : null}
         </ExpansionPanel>
       ))}
     </Grid>
