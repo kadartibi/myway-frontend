@@ -17,14 +17,15 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function GeneratePlannedDays() {
+export default function GeneratePlannedDays(props) {
   const [plannedDays] = useContext(PlannedDaysContext);
   const classes = useStyles();
+  const inRecommended = props.inRecommended;
 
   return plannedDays ? (
     <div className={classes.root}>
       {plannedDays.map(day => (
-        <PlannedDay key={day.id} day={day} />
+        <PlannedDay key={day.id} day={day} inRecommended={inRecommended}/>
       ))}
     </div>
   ) : (
