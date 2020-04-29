@@ -15,7 +15,7 @@ export const AdminProvider = (props) => {
     }).then(res => {
       setAllUsers(res.data)
       
-    })}, []);
+    })}, [allUsers]);
 
   function deleteUser(userName){
     Axios.delete(server + "/user/delete/"+userName, {
