@@ -68,7 +68,7 @@ export default function PlannedDay(props) {
     e.preventDefault();
     axios
       .post(
-        "http://localhost:8080/trip/" +
+        "http://localhost:8762/trip/" +
           day.trip.id +
           "/add-activity-to-day/" +
           day.id,

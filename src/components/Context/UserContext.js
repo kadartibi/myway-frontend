@@ -11,7 +11,7 @@ export const UserProvider = props => {
   const [email, setEmail] = useState();
 
   useEffect(() => {
-    Axios.get(server + "/auth/user", {
+    Axios.get(server + "/current-user-object", {
       withCredentials: true
     }).then(res => {
       setUsername(res.data.userName);

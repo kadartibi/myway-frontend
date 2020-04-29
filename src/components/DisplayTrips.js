@@ -56,9 +56,7 @@ function RecommendedTrips(props) {
       ))}
     </Grid>
   ) : (
-    <Backdrop className={classes.backdrop} open={true}>
-      <CircularProgress color="inherit" />
-    </Backdrop>
+    <h2>No trips to display yet</h2>  
   );
 }
 

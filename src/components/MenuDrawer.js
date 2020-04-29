@@ -61,7 +61,7 @@ export default function MenuDrawer() {
   const logout = () => {
     axios.defaults.withCredentials = true;
     axios
-      .post("http://localhost:8080/auth/logout", {
+      .post("http://localhost:8762/logout/", {
         withCredentials: true
       })
       .then(res => {

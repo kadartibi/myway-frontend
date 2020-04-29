@@ -54,7 +54,7 @@ export default function SignIn() {
   const login = () => {
     axios
       .post(
-        "http://localhost:8080/auth/login",
+        "http://localhost:8762/login",
         {
           username,
           password
