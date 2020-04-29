@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import { withStyles, makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -8,6 +8,10 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import Card from "@material-ui/core/Card";
+import { AdminContext } from '../components/Context/AdminContext';
+
+import Button from '@material-ui/core/Button';
+import DeleteIcon from '@material-ui/icons/Delete';
 
 
 const StyledTableCell = withStyles((theme) => ({
@@ -28,7 +32,7 @@ const StyledTableRow = withStyles((theme) => ({
   },
 }))(TableRow);
 
-function createTestData(name, trips) {
+/*function createTestData(name, trips) {
   return { name, trips };
 }
 
@@ -36,7 +40,7 @@ const rows = [
   createTestData('Kertész Géza', 4),
   createTestData('Berényi Miklós', 5),
   createTestData('Bartha Zsolt', 6),
-];
+];*/
 
 const useStyles = makeStyles({
   table: {
@@ -54,26 +58,41 @@ const useStyles = makeStyles({
   }
 });
 
+
+
 export default function Admin() {
   const classes = useStyles();
+  const{ allUsers, deleteUser } = useContext(AdminContext);
+  console.log(allUsers)
+  
 
-  return (
+  return allUsers === undefined ? (<h2>WAAAAAAIIIIIT</h2>): (
     <Card className={classes.root}>
     <TableContainer component={Paper}>
       <Table className={classes.table} aria-label="customized table">
         <TableHead>
           <TableRow>
             <StyledTableCell>Username</StyledTableCell>
-            <StyledTableCell align="right">Number of trips created</StyledTableCell>
+            <StyledTableCell align="right"></StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
-            <StyledTableRow key={row.name}>
+          {allUsers.map(user => (
+            <StyledTableRow key={user.userName}>
               <StyledTableCell component="th" scope="row">
-                {row.name}
+                {user.userName}
               </StyledTableCell>
-              <StyledTableCell align="right">{row.trips}</StyledTableCell>
+              <StyledTableCell align="right">
+                <Button
+                  variant="contained"
+                  color="secondary"
+                  className={classes.button}
+                  startIcon={<DeleteIcon />}
+                  onClick={deleteUser(user.userName)}
+                >
+                  Delete
+                </Button>
+              </StyledTableCell>
             </StyledTableRow>
           ))}
         </TableBody>
