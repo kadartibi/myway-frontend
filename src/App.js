@@ -20,11 +20,13 @@ import MenuDrawer from "./components/MenuDrawer";
 import { MuiPickersUtilsProvider } from "@material-ui/pickers";
 import DateFnsUtils from "@date-io/date-fns";
 import { CompletedTripProvider } from "./components/Context/CompletedTripContext";
+import { AdminProvider } from "./components/Context/AdminContext";
 
 export default function App() {
   return (
     <div className="App">
       <UserProvider>
+        <AdminProvider>
         <CompletedTripProvider>
           <NewTripProvider>
             <PlannedDaysProvider tripId={"0"}>
@@ -48,6 +50,7 @@ export default function App() {
             </PlannedDaysProvider>
           </NewTripProvider>
         </CompletedTripProvider>
+        </AdminProvider>
       </UserProvider>
     </div>
   );
