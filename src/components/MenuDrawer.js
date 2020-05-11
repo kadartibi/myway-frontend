@@ -14,7 +14,7 @@ import IconButton from "@material-ui/core/IconButton";
 import AutoRenewIcon from "@material-ui/icons/Autorenew";
 import ExploreIcon from "@material-ui/icons/Explore";
 import LockOpenIcon from "@material-ui/icons/LockOpen";
-import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
+import SupervisorAccountIcon from "@material-ui/icons/SupervisorAccount";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import React, { useContext } from "react";

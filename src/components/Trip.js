@@ -18,12 +18,15 @@ const useStyles = makeStyles({
     transform: "scale(0.8)"
   },
   card: {
-    cursor: "pointer",
     minWidth: 1000,
     maxWidth: 1000
   },
+  pointer: {
+    cursor: "pointer"
+  },
   content: {
-    fontStyle: "italic"
+    fontStyle: "italic",
+    cursor: "default"
   }
 });
 
@@ -32,19 +35,26 @@ export default function Trip(props) {
   const classes = useStyles();
   const bull = <span className={classes.bullet}>•</span>;
   const trip = props.trip;
+
+  const recommendTrip = 
+    userName !== undefined && userName !== trip.tripUserId && !trip.ratings.includes(userName) ?
+    <div button className={classes.pointer}>{bull}Recommend Trip!{bull}</div> : ""
+  ;
   return (
     <Card className={classes.card}>
       <CardHeader
+        className={classes.pointer}
         titleTypographyProps={{ variant: "h5" }}
-        title={props.trip.name}
-      />
+        title={trip.name}>
+        </CardHeader>
       <Divider />
       <CardContent className={classes.content}>
         <Typography align="center" variant="h6">
           {trip.country}
           {bull}From: {trip.dateOfDeparture}
           {bull}To: {trip.dateOfReturn}
-          {bull}Rating: {trip.rating}
+          {bull}Rating: {trip.ratings.length}
+          {recommendTrip}
         </Typography>
       </CardContent>
     </Card>
