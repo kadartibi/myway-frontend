@@ -29,28 +29,10 @@ export default function CopyTripButton(props) {
   };
 
   const sendToServer = (props) => {
-    let plannedDays = [];
-    plannedDays.push(props.trip.plannedDays[0]);
-    for (let each of props.trip.plannedDays[0].trip.plannedDays) {
-      if (typeof each === "number") {
-        continue;
-      }
-      plannedDays.push(each);
-    }
-    plannedDays[0].trip = plannedDays[1].trip;
-
+    console.log(props.trip.id)
     axios
-      .post(
-        "http://localhost:8762/trip/copy-trip",
-        {
-          name: props.trip.name,
-          country: props.trip.country,
-          city: props.trip.city,
-          dateOfDeparture: props.trip.dateOfDeparture,
-          dateOfReturn: props.trip.dateOfReturn,
-          travelTypes: props.trip.travelType,
-          plannedDays: plannedDays,
-        },
+      .get(
+        "http://localhost:8762/trip/copy-trip/" + props.trip.id,
         {
           withCredentials: true,
         }
