@@ -1,12 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import Button from "@material-ui/core/Button";
 import Snackbar from "@material-ui/core/Snackbar";
 import IconButton from "@material-ui/core/IconButton";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
-import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
+import {
+  MuiPickersUtilsProvider,
+  KeyboardDatePicker,
+} from "@material-ui/pickers";
+import DateFnsUtils from "@date-io/date-fns";
 import Slide from "@material-ui/core/Slide";
 import CloseIcon from "@material-ui/icons/Close";
 import { makeStyles } from "@material-ui/core/styles";
@@ -18,13 +22,21 @@ const useStyles = makeStyles({
   },
 });
 
-export default function CopyTripButton(props) {
-  const [open, setOpen] = React.useState(false);
-  const Transition = React.forwardRef(function Transition(props, ref) {
-    return <Slide direction="up" ref={ref} {...props} />;
-  });
+const Transition = React.forwardRef(function Transition(props, ref) {
+  return <Slide direction="up" ref={ref} {...props} />;
+});
 
-  const [openDialog, setOpenDialog] = React.useState(false);
+export default function CopyTripButton(props) {
+  const [open, setOpen] = useState(false);
+
+
+  const [selectedDate, setSelectedDate] = useState(new Date());
+
+  const handleDateChange = (date) => {
+    setSelectedDate(date);
+  };
+
+  const [openDialog, setOpenDialog] = useState(false);
 
   const handleClickOpenDialog = () => {
     setOpenDialog(true);
@@ -48,7 +60,6 @@ export default function CopyTripButton(props) {
   };
 
   const sendToServer = (props) => {
-    console.log(props.trip.id);
     axios
       .get("http://localhost:8762/trip/copy-trip/" + props.trip.id, {
         withCredentials: true,
@@ -82,12 +93,22 @@ export default function CopyTripButton(props) {
         aria-describedby="alert-dialog-slide-description"
       >
         <DialogTitle id="alert-dialog-slide-title">
-          {"Use Google's location service?"}
+          {"Select start date for trip:"}
         </DialogTitle>
         <DialogContent>
-          <DialogContentText id="alert-dialog-slide-description">
-            Change date
-          </DialogContentText>
+          <MuiPickersUtilsProvider utils={DateFnsUtils}>
+            <KeyboardDatePicker
+              margin="normal"
+              id="date-picker-dialog"
+              label="Date picker dialog"
+              format="MM/dd/yyyy"
+              value={selectedDate}
+              onChange={handleDateChange}
+              KeyboardButtonProps={{
+                "aria-label": "change date",
+              }}
+            />
+          </MuiPickersUtilsProvider>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleCloseDialog} color="primary">
@@ -112,20 +133,20 @@ export default function CopyTripButton(props) {
         }}
         open={open}
         autoHideDuration={3000}
-        onClose={handleCloseDialog}
+        onClose={handleClose}
         message="Trip copied"
         action={
           <React.Fragment>
             <Button
               color="secondary"
               size="small"
-              onClick={handleCloseDialog}
+              onClick={handleClose}
             />
             <IconButton
               size="small"
               aria-label="close"
               color="inherit"
-              onClick={handleCloseDialog}
+              onClick={handleClose}
             >
               <CloseIcon fontSize="small" />
             </IconButton>
