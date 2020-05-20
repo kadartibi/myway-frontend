@@ -29,7 +29,6 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 export default function CopyTripButton(props) {
   const [open, setOpen] = useState(false);
 
-
   const [selectedDate, setSelectedDate] = useState(new Date());
 
   const handleDateChange = (date) => {
@@ -61,9 +60,15 @@ export default function CopyTripButton(props) {
 
   const sendToServer = (props) => {
     axios
-      .get("http://localhost:8762/trip/copy-trip/" + props.trip.id, {
-        withCredentials: true,
-      })
+      .post(
+        "http://localhost:8762/trip/copy-trip/" + props.trip.id,
+        {
+          date: selectedDate.toISOString().split('T')[0],
+        },
+        {
+          withCredentials: true,
+        }
+      )
       .then((response) => {
         console.log(response);
       })
@@ -137,11 +142,7 @@ export default function CopyTripButton(props) {
         message="Trip copied"
         action={
           <React.Fragment>
-            <Button
-              color="secondary"
-              size="small"
-              onClick={handleClose}
-            />
+            <Button color="secondary" size="small" onClick={handleClose} />
             <IconButton
               size="small"
               aria-label="close"

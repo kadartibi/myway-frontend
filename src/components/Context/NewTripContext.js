@@ -23,7 +23,6 @@ export const NewTripProvider = props => {
           dateOfDeparture: dateOfDeparture,
           dateOfReturn: dateOfReturn,
           travelTypes: travelType
-          // add user later
         },
         {
           withCredentials: true
