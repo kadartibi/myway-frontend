@@ -13,7 +13,7 @@ export const CompletedTripProvider = props => {
     }).then(res => {
       setTrips(res.data);
     });
-  }, []);
+  }, [trips]);
 
   return (
     <CompletedTripContext.Provider value={[trips, setTrips]}>
