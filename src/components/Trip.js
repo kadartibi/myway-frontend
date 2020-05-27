@@ -35,11 +35,7 @@ export default function Trip(props) {
   const classes = useStyles();
   const bull = <span className={classes.bullet}>•</span>;
   const trip = props.trip;
-
-  const recommendTrip = 
-    userName !== undefined && userName !== trip.tripUserId && !trip.ratings.includes(userName) ?
-    <div button className={classes.pointer}>{bull}Recommend Trip!{bull}</div> : ""
-  ;
+  
   return (
     <Card className={classes.card}>
       <CardHeader
@@ -54,7 +50,6 @@ export default function Trip(props) {
           {bull}From: {trip.dateOfDeparture}
           {bull}To: {trip.dateOfReturn}
           {bull}Rating: {trip.ratings.length}
-          {recommendTrip}
         </Typography>
       </CardContent>
     </Card>
