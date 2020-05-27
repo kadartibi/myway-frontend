@@ -68,7 +68,9 @@ function RecommendedTrips(props) {
             {inRecommended && userName !== undefined 
             && userName !== trip.tripUserId && !trip.ratings.includes(userName) ? (
               <RecommendButton trip={trip} />
-            ) : (<Button variant="outlined" size="small" disabled>Recommend Trip</Button>)}
+            ) : inRecommended && userName !== undefined ? 
+              (<Button variant="outlined" size="small" disabled>Recommend Trip</Button>) : null}
+            
           </div>
         </ExpansionPanel>
       ))}
