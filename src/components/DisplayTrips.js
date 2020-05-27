@@ -28,6 +28,9 @@ const useStyles = makeStyles((theme) => ({
     minWidth: 1000,
     maxWidth: 1000,
   },
+  closingButtons: {
+    marginBottom: "20px",
+  },
   backdrop: {
     zIndex: theme.zIndex.drawer + 1,
     color: "#fff",
@@ -58,14 +61,14 @@ function RecommendedTrips(props) {
               <GeneratePlannedDays inRecommended={inRecommended} />
             </PlannedDaysProvider>
           </ExpansionPanelDetails>
-          <div>
+          <div className={classes.closingButtons}>
             {inRecommended && userName !== undefined ? (
             <CopyTripButton trip={trip} /> 
             ) : null}
             {inRecommended && userName !== undefined 
             && userName !== trip.tripUserId && !trip.ratings.includes(userName) ? (
               <RecommendButton trip={trip} />
-            ) : null}
+            ) : (<Button variant="outlined" size="small" disabled>Recommend Trip</Button>)}
           </div>
         </ExpansionPanel>
       ))}

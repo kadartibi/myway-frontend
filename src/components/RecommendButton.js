@@ -7,7 +7,6 @@ import { UserContext } from "../components/Context/UserContext";
 
 const useStyles = makeStyles({
   button: {
-    marginBottom: 20,
   },
 });
 

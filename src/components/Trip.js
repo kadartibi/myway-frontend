@@ -1,5 +1,4 @@
-import React,  { useContext } from "react";
-import { UserContext } from "../components/Context/UserContext";
+import React from "react";
 import {
   makeStyles,
   Card,
@@ -31,11 +30,10 @@ const useStyles = makeStyles({
 });
 
 export default function Trip(props) {
-  const { userName } = useContext(UserContext);
   const classes = useStyles();
   const bull = <span className={classes.bullet}>•</span>;
   const trip = props.trip;
-  
+
   return (
     <Card className={classes.card}>
       <CardHeader
