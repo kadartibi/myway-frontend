@@ -14,13 +14,12 @@ export const SearchProvider = (props) => {
    
   
   useEffect(() => {
-      console.log(searchType, searchString)
     axios.get(server + "/trip/search/"+ (String(searchString)) + "&" + (String(searchType)), 
     ).then(res => {
         console.log(res.data)
         setTrips(res.data)
     });
-  },[searchString]);
+  },[searchString, searchType]);
 
  
 
