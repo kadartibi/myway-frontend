@@ -21,21 +21,21 @@ const useStyles = makeStyles({
     margin: "10px",
     height: "auto",
     display: "inline-block",
-    verticalAlign: "top"
+    verticalAlign: "top",
   },
   action: {
     width: "115px",
-    margin: "auto"
+    margin: "auto",
   },
   inactivePointer: {
-    cursor: "default"
+    cursor: "default",
   },
   invisible: {
-    visibility: "hidden"
+    visibility: "hidden",
   },
   visible: {
-    visibility: "visible"
-  }
+    visibility: "visible",
+  },
 });
 
 export default function PlannedDay(props) {
@@ -48,11 +48,11 @@ export default function PlannedDay(props) {
   const { userName } = useContext(UserContext);
   const inRecommended = props.inRecommended;
 
-  const addActivityDescription = e => {
+  const addActivityDescription = (e) => {
     setActivityDescriptionInput(e.target.value);
   };
 
-  const addPrice = e => {
+  const addPrice = (e) => {
     setPriceInput(e.target.value);
   };
 
@@ -65,7 +65,7 @@ export default function PlannedDay(props) {
     return sumResult;
   };
 
-  const handlePostRequest = e => {
+  const handlePostRequest = (e) => {
     e.preventDefault();
     axios
       .post(
@@ -75,15 +75,17 @@ export default function PlannedDay(props) {
           day.id,
         {
           description: activityDescriptionInput,
-          price: priceInput
+          price: priceInput,
         }
       )
-      .then(function(response) {
+      .then(function (response) {
         setTotalCost(Number(totalCost) + Number(priceInput));
         setDay(response.data);
         setActivities(response.data.activities);
+        setActivityDescriptionInput("");
+        setPriceInput("");
       })
-      .catch(function(error) {
+      .catch(function (error) {
         console.log(error);
       });
   };
@@ -149,18 +151,20 @@ export default function PlannedDay(props) {
       <CardContent>
         <form noValidate autoComplete="off" onSubmit={handlePostRequest}>
           <Input
-            id="standard-basic"
+            id="activity"
             className="PlannedDayInputField"
             placeholder="Activity"
             onChange={addActivityDescription}
+            value={activityDescriptionInput}
             required
           />
           <Input
-            type="number"
-            id="standard-basic"
+            id="price"
+            type = "number"
             className="PlannedDayInputField"
             placeholder="Price"
             onChange={addPrice}
+            value={priceInput}
             required
           />
           <CardActions className={classes.action}>
