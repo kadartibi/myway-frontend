@@ -17,7 +17,7 @@ export const RecommendedTripProvider = props => {
 
   return (
     <RecommendedTripContext.Provider
-      value={[recommendedTrips, setRecommendedTrips]}
+      value={{recommendedTrips, setRecommendedTrips}}
     >
       {props.children}
     </RecommendedTripContext.Provider>

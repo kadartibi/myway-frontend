@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import Trip from "./Trip";
 import CopyTripButton from "../components/CopyTripButton";
 import RecommendButton from "../components/RecommendButton";
@@ -13,6 +13,8 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import GeneratePlannedDays from "./GeneratePlannedDays";
 import { PlannedDaysProvider } from "./Context/PlannedDaysContext";
 import { UserContext } from "../components/Context/UserContext";
+import { RecommendedTripContext } from "../components/Context/RecommendedTripContext";
+
 import Button from "@material-ui/core/Button";
 
 const useStyles = makeStyles((theme) => ({
@@ -38,6 +40,10 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function RecommendedTrips(props) {
+  const { recommendedTrips } = useContext(RecommendedTripContext);
+  useEffect(() => {
+  },[recommendedTrips]);
+
   const { userName } = useContext(UserContext);
   const trips = props.trips;
   const inRecommended = props.inRecommended;

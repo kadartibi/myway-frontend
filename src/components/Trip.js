@@ -47,7 +47,7 @@ export default function Trip(props) {
           {trip.country}
           {bull}From: {trip.dateOfDeparture}
           {bull}To: {trip.dateOfReturn}
-          {bull}Rating: {trip.ratings.length}
+          {bull}Rating: {trip.rating}
         </Typography>
       </CardContent>
     </Card>
