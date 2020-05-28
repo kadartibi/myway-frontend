@@ -12,17 +12,16 @@ import CardContent from "@material-ui/core/CardContent";
 
 const useStyles = makeStyles((theme) => ({
   inputControl:{
-    minWidth: "60%",
+    minWidth: "80%",
   },
   formControl: {
     minWidth: 150,
   },
   cardRoot: {
     marginTop: "50px",
-    margin: "auto",
-    maxWidth: "50%",
-    minWidth: "300",
-    textAlign: "center"
+    marginBottom: "50px",
+    width: "100%",
+    textAlign: "center",
   },
   cardContent: {
     display: "inline-block"
@@ -42,7 +41,7 @@ export default function SearchBar() {
   };
 
   return (
-    <Card className={classes.root}>
+    <Card className={classes.cardRoot}>
         <CardContent className={classes.content}>
             <form className={classes.root} noValidate autoComplete="off">
                 
