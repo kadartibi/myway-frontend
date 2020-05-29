@@ -75,23 +75,28 @@ export default function Admin() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {allUsers.map(user => (
-            <StyledTableRow key={user.userName}>
-              <StyledTableCell component="th" scope="row">
-                {user.userName}
-              </StyledTableCell>
-              <StyledTableCell align="right">
-                <Button
-                  variant="contained"
-                  color="secondary"
-                  className={classes.button}
-                  startIcon={<DeleteIcon />}
-                  onClick={()=>(deleteUser(user.userName))}
-                >
-                  Delete
-                </Button>
-              </StyledTableCell>
-            </StyledTableRow>
+          {allUsers.map(user => ( user.userName === "admin" ? (<StyledTableRow key={user.userName}>
+                <StyledTableCell component="th" scope="row">
+                  {user.userName}
+                </StyledTableCell>
+                <StyledTableCell align="right">
+                </StyledTableCell>
+              </StyledTableRow>):(<StyledTableRow key={user.userName}>
+                <StyledTableCell component="th" scope="row">
+                  {user.userName}
+                </StyledTableCell>
+                <StyledTableCell align="right">
+                  <Button
+                    variant="contained"
+                    color="secondary"
+                    className={classes.button}
+                    startIcon={<DeleteIcon />}
+                    onClick={()=>(deleteUser(user.userName))}
+                  >
+                    Delete
+                  </Button>
+                </StyledTableCell>
+              </StyledTableRow>)
           ))}
         </TableBody>
       </Table>

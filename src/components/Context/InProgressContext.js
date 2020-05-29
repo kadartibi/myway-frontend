@@ -13,7 +13,7 @@ export const InProgressProvider = props => {
     }).then(res => {
       setTrips(res.data);
     });
-  }, [trips]);
+  }, []);
 
   return (
     <InProgressContext.Provider value={[trips, setTrips]}>

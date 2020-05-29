@@ -3,19 +3,18 @@ import Trip from "./Trip";
 import CopyTripButton from "../components/CopyTripButton";
 import RecommendButton from "../components/RecommendButton";
 import Grid from "@material-ui/core/Grid";
-// import CircularProgress from "@material-ui/core/CircularProgress";
-import { makeStyles } from "@material-ui/core";
+import { makeStyles, Typography } from "@material-ui/core";
 import ExpansionPanel from "@material-ui/core/ExpansionPanel";
 import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
 import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-// import Backdrop from "@material-ui/core/Backdrop";
 import GeneratePlannedDays from "./GeneratePlannedDays";
 import { PlannedDaysProvider } from "./Context/PlannedDaysContext";
 import { UserContext } from "../components/Context/UserContext";
 import { RecommendedTripContext } from "../components/Context/RecommendedTripContext";
 
 import Button from "@material-ui/core/Button";
+
 
 const useStyles = makeStyles((theme) => ({
   panel: {
@@ -37,6 +36,10 @@ const useStyles = makeStyles((theme) => ({
     zIndex: theme.zIndex.drawer + 1,
     color: "#fff",
   },
+  noTrip: {
+    color: "#fff",
+    textShadow: "3px 3px #000"
+  }
 }));
 
 function RecommendedTrips(props) {
@@ -82,7 +85,9 @@ function RecommendedTrips(props) {
       ))}
     </Grid>
   ) : (
-    <h2>No trips to display yet</h2>
+    <div className={classes.noTrip}>
+    <Typography variant="h4">No trips to display yet!</Typography>
+    </div>
   );
 }
 

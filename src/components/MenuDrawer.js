@@ -14,7 +14,8 @@ import IconButton from "@material-ui/core/IconButton";
 import AutoRenewIcon from "@material-ui/icons/Autorenew";
 import ExploreIcon from "@material-ui/icons/Explore";
 import LockOpenIcon from "@material-ui/icons/LockOpen";
-import SupervisorAccountIcon from "@material-ui/icons/SupervisorAccount";
+import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
+import SearchIcon from '@material-ui/icons/Search';
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import React, { useContext } from "react";
@@ -131,6 +132,12 @@ export default function MenuDrawer() {
               <HomeIcon />
             </ListItemIcon>
             <ListItemText primary="Home" />
+          </ListItem>
+          <ListItem button component={Link} to="/search">
+            <ListItemIcon>
+              <SearchIcon/>
+            </ListItemIcon>
+            <ListItemText primary="Search" />
           </ListItem>
           <ListItem button component={Link} to="/new-trip">
             <ListItemIcon>

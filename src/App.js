@@ -7,6 +7,7 @@ import Completed from "./pages/Completed";
 import SignUp from "./pages/SignUp";
 import SignIn from "./pages/SignIn";
 import UserProfile from "./pages/UserProfile";
+import Search from "./pages/Search";
 import Admin from "./pages/Admin";
 import { Route, BrowserRouter as Router } from "react-router-dom";
 import { PlannedDaysProvider } from "./components/Context/PlannedDaysContext";
@@ -21,10 +22,12 @@ import { MuiPickersUtilsProvider } from "@material-ui/pickers";
 import DateFnsUtils from "@date-io/date-fns";
 import { CompletedTripProvider } from "./components/Context/CompletedTripContext";
 import { AdminProvider } from "./components/Context/AdminContext";
+import { SearchProvider } from "./components/Context/SearchContext";
 
 export default function App() {
   return (
     <div className="App">
+      <SearchProvider>
       <UserProvider>
         <AdminProvider>
         <CompletedTripProvider>
@@ -44,6 +47,7 @@ export default function App() {
                     <Route path="/in-progress" component={InProgress} />
                     <Route path="/completed" component={Completed} />
                     <Route path="/user" component={UserProfile} />
+                    <Route path="/search" component={Search} />
                   </Router>
                 </RecommendedTripProvider>
               </InProgressProvider>
@@ -52,6 +56,7 @@ export default function App() {
         </CompletedTripProvider>
         </AdminProvider>
       </UserProvider>
+      </SearchProvider>
     </div>
   );
 }
