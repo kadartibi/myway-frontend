@@ -24,14 +24,14 @@ const useStyles = makeStyles({
 
 export default function Completed() {
     const classes = useStyles();
-    const [trips] = useContext(CompletedTripContext);
+    const [completedTrips] = useContext(CompletedTripContext);
 
   return (
     <div className={classes.root}>
       <div className={classes.header}>
         <Typography variant="h2">Completed Trips</Typography>
       </div>
-      <DisplayTrips trips={trips} class={classes.root} />
+      <DisplayTrips trips={completedTrips} class={classes.root} />
     </div>
   );
 }

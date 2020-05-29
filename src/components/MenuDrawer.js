@@ -14,13 +14,15 @@ import IconButton from "@material-ui/core/IconButton";
 import AutoRenewIcon from "@material-ui/icons/Autorenew";
 import ExploreIcon from "@material-ui/icons/Explore";
 import LockOpenIcon from "@material-ui/icons/LockOpen";
-import SupervisorAccountIcon from '@material-ui/icons/SupervisorAccount';
-import SearchIcon from '@material-ui/icons/Search';
+import SupervisorAccountIcon from "@material-ui/icons/SupervisorAccount";
+import SearchIcon from "@material-ui/icons/Search";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import React, { useContext } from "react";
 import axios from "axios";
 import { UserContext } from "../components/Context/UserContext";
+import { InProgressContext } from "../components/Context/InProgressContext";
+import { CompletedTripContext } from "../components/Context/CompletedTripContext";
 
 const useStyles = makeStyles({
   list: {
@@ -42,6 +44,15 @@ const useStyles = makeStyles({
 });
 
 export default function MenuDrawer() {
+  const [trips, setTrips, refreshInProgressContext] = useContext(
+    InProgressContext
+  );
+  const [
+    completedTrips,
+    setCompletedTrips,
+    refreshCompletedContext,
+  ] = useContext(CompletedTripContext);
+
   const classes = useStyles();
   const [state, setState] = React.useState({
     left: false,
@@ -135,7 +146,7 @@ export default function MenuDrawer() {
           </ListItem>
           <ListItem button component={Link} to="/search">
             <ListItemIcon>
-              <SearchIcon/>
+              <SearchIcon />
             </ListItemIcon>
             <ListItemText primary="Search" />
           </ListItem>
@@ -145,13 +156,18 @@ export default function MenuDrawer() {
             </ListItemIcon>
             <ListItemText primary="New trip" />
           </ListItem>
-          <ListItem button component={Link} to="/in-progress">
+          <ListItem
+            button
+            component={Link}
+            to="/in-progress"
+            onClick={refreshInProgressContext}
+          >
             <ListItemIcon>
               <AutoRenewIcon />
             </ListItemIcon>
             <ListItemText primary="In progress" />
           </ListItem>
-          <ListItem button component={Link} to="/completed">
+          <ListItem button component={Link} to="/completed" onClick={refreshCompletedContext}>
             <ListItemIcon>
               <BeenHereIcon />
             </ListItemIcon>
