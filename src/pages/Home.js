@@ -29,7 +29,7 @@ const useStyles = makeStyles({
 
 export default function Home() {
   const classes = useStyles();
-  const [trips] = useContext(RecommendedTripContext);
+  const {recommendedTrips} = useContext(RecommendedTripContext);
 
   return (
     <div className={classes.root}>
@@ -44,7 +44,7 @@ export default function Home() {
           Here are the best ones so far!
         </Typography>
       </div>
-      <DisplayTrips trips={trips} inRecommended={true} class={classes.root} />
+      <DisplayTrips trips={recommendedTrips} inRecommended={true} class={classes.root} />
     </div>
   );
 }

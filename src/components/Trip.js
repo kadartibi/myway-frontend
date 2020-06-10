@@ -17,12 +17,15 @@ const useStyles = makeStyles({
     transform: "scale(0.8)"
   },
   card: {
-    cursor: "pointer",
     minWidth: 1000,
     maxWidth: 1000
   },
+  pointer: {
+    cursor: "pointer"
+  },
   content: {
-    fontStyle: "italic"
+    fontStyle: "italic",
+    cursor: "default"
   }
 });
 
@@ -30,12 +33,14 @@ export default function Trip(props) {
   const classes = useStyles();
   const bull = <span className={classes.bullet}>•</span>;
   const trip = props.trip;
+
   return (
     <Card className={classes.card}>
       <CardHeader
+        className={classes.pointer}
         titleTypographyProps={{ variant: "h5" }}
-        title={props.trip.name}
-      />
+        title={trip.name}>
+        </CardHeader>
       <Divider />
       <CardContent className={classes.content}>
         <Typography align="center" variant="h6">

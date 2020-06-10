@@ -14,7 +14,7 @@ export const NewTrip = () => {
   const classes = useStyles();
   return (
     <div>
-      <Typography className={classes.header} variant="h2">Add a new Trip</Typography>
+      <Typography className={classes.header} variant="h2">Create a new trip</Typography>
       <AddNewTripForm />
     </div>
   );

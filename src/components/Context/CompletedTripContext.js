@@ -4,19 +4,29 @@ import { server } from "./ServerSelector";
 
 export const CompletedTripContext = createContext();
 
-export const CompletedTripProvider = props => {
-  const [trips, setTrips] = useState([]);
+export const CompletedTripProvider = (props) => {
+  const [completedTrips, setCompletedTrips] = useState([]);
+
+  const refreshCompletedContext = () => {
+    Axios.get(server + "/trip/completed", {
+      withCredentials: true,
+    }).then((res) => {
+      setCompletedTrips(res.data);
+    });
+  };
 
   useEffect(() => {
     Axios.get(server + "/trip/completed", {
-      withCredentials: true
-    }).then(res => {
-      setTrips(res.data);
+      withCredentials: true,
+    }).then((res) => {
+      setCompletedTrips(res.data);
     });
   }, []);
 
   return (
-    <CompletedTripContext.Provider value={[trips, setTrips]}>
+    <CompletedTripContext.Provider
+      value={[completedTrips, setCompletedTrips, refreshCompletedContext]}
+    >
       {props.children}
     </CompletedTripContext.Provider>
   );

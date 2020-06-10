@@ -10,6 +10,7 @@ export const UserProvider = props => {
   const [lastName, setLastName] = useState();
   const [email, setEmail] = useState();
 
+
   useEffect(() => {
     Axios.get(server + "/current-user-object", {
       withCredentials: true

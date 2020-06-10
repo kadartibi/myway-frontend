@@ -1,7 +1,8 @@
 import React, { useContext } from "react";
 import { makeStyles, Typography } from "@material-ui/core";
 import DisplayTrips from "../components/DisplayTrips";
-import { CompletedTripContext } from "../components/Context/CompletedTripContext";
+import { SearchContext } from "../components/Context/SearchContext";
+import SearchBar from "../components/SearchBar";
 
 const useStyles = makeStyles({
   header: {
@@ -22,16 +23,18 @@ const useStyles = makeStyles({
   }
 });
 
-export default function Completed() {
+export default function Search() {
     const classes = useStyles();
-    const [completedTrips] = useContext(CompletedTripContext);
+    const {trips} = useContext(SearchContext);
 
   return (
     <div className={classes.root}>
       <div className={classes.header}>
-        <Typography variant="h2">Completed Trips</Typography>
+      <Typography variant="h2">Search trips</Typography>
       </div>
-      <DisplayTrips trips={completedTrips} class={classes.root} />
+      <SearchBar/>
+      <DisplayTrips trips={trips} class={classes.root} />
+     
     </div>
   );
 }

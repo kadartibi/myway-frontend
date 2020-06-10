@@ -7,6 +7,14 @@ export const InProgressContext = createContext();
 export const InProgressProvider = props => {
   const [trips, setTrips] = useState([]);
 
+  const refreshInProgressContext = () => {
+    Axios.get(server + "/trip/in-progress", {
+      withCredentials: true
+    }).then(res => {
+      setTrips(res.data);
+    });    
+  }
+
   useEffect(() => {
     Axios.get(server + "/trip/in-progress", {
       withCredentials: true
@@ -16,7 +24,7 @@ export const InProgressProvider = props => {
   }, []);
 
   return (
-    <InProgressContext.Provider value={[trips, setTrips]}>
+    <InProgressContext.Provider value={[trips, setTrips, refreshInProgressContext]}>
       {props.children}
     </InProgressContext.Provider>
   );
